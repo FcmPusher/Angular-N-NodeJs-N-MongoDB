@@ -1,0 +1,574 @@
+<!-- <div class="flex flex-col items-center justify-center h-full">
+  <h1 class="text-3xl md:text-6xl lg:text-7xl">
+    <span
+      class="hidden text-xl text-center md:text-3xl lg:text-6xl md:inline-block"
+    >
+      🎉🎉🎉
+    </span>
+    dashboard works!
+    <span class="text-xl text-center md:text-3xl lg:text-6xl"> 🎉🎉🎉 </span>
+  </h1>
+  <a
+    [routerLink]="[path.home]"
+    class="inline-block h-12 px-6 py-3 mb-12 font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-500 focus:ring-4 focus:ring-offset-blue-600 focus:outline-none"
+  >
+    Back to home
+  </a>
+</div> -->
+<p-toast></p-toast>
+
+<div class="card">
+  <p-toolbar styleClass="p-mb-4 " class="mx-5">
+    <ng-template pTemplate="left">
+       <h1 class="text-gray-600 ">All FCMPusher APP</h1>
+    </ng-template>
+
+    <ng-template pTemplate="right">
+        <!-- <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import" chooseLabel="Import"
+            class="p-mr-2 p-d-inline-block"></p-fileUpload>
+        <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help"></button> -->
+    </ng-template>
+</p-toolbar>
+    <p-toolbar styleClass="p-mb-4">
+        <ng-template pTemplate="left">
+            <!-- <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2"
+                (click)="openNew()"></button> -->
+            <button pButton pRipple label="New User" icon="pi pi-plus" class="p-button-success p-mr-2"
+                (click)="newUser()"></button>
+            <!-- <button pButton pRipple [label]="Delete" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedProducts()" [disabled]="!selectedProducts || !selectedProducts.length"></button> -->
+        </ng-template>
+
+        <ng-template pTemplate="right">
+            <!-- <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import" chooseLabel="Import"
+                class="p-mr-2 p-d-inline-block"></p-fileUpload>
+            <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help"></button> -->
+        </ng-template>
+    </p-toolbar>
+    <!--
+    <p-table #dt [value]="products" [rows]="10" [paginator]="true"
+        [globalFilterFields]="['name','country.name','representative.name','status']" [(selection)]="selectedProducts"
+        [rowHover]="true" dataKey="id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [showCurrentPageReport]="true">
+        <ng-template pTemplate="caption">
+            <div class="p-d-flex p-ai-center p-jc-between">
+                <h5 class="p-m-0">Manage Products</h5>
+                <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                        placeholder="Search..." />
+                </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width: 3rem">
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+                <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon>
+                </th>
+                <th pSortableColumn="price">Price <p-sortIcon field="price"></p-sortIcon>
+                </th>
+                <th pSortableColumn="category">Category <p-sortIcon field="category"></p-sortIcon>
+                </th>
+                <th pSortableColumn="rating">Reviews <p-sortIcon field="rating"></p-sortIcon>
+                </th>
+                <th pSortableColumn="inventoryStatus">Status <p-sortIcon field="inventoryStatus"></p-sortIcon>
+                </th>
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product>
+            <tr>
+                <td>
+                    <p-tableCheckbox [value]="product"></p-tableCheckbox>
+                </td>
+                <td>{{product.name}}</td>
+                <td>{{product.price | currency:'USD'}}</td>
+                <td>{{product.category}}</td>
+                <td>
+                    <p-rating [ngModel]="product.rating" [readonly]="true" [cancel]="false"></p-rating>
+                </td>
+                <td><span
+                        [class]="'product-badge status-' + product.inventoryStatus.toLowerCase()">{{product.inventoryStatus}}</span>
+                </td>
+                <td>
+                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2"
+                        (click)="editProduct(product)"></button>
+                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
+                        (click)="deleteProduct(product)"></button>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="p-d-flex p-ai-center p-jc-between">
+                In total there are {{products ? products.length : 0 }} products.
+            </div>
+        </ng-template>
+    </p-table> -->
+
+
+    <p-table #dt [value]="users" [rows]="10" [paginator]="true" [(selection)]="selectedUsers" [rowHover]="true"
+        dataKey="id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [showCurrentPageReport]="true">
+        <ng-template pTemplate="caption">
+            <div class="p-d-flex p-ai-center p-jc-between">
+                <h5 class="p-m-0">Manage Users</h5>
+                <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="dt.filterGlobal($event.target, 'contains')"
+                        placeholder="Search..." />
+                </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width: 3rem">
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+                <th pSortableColumn="userId">User Id <p-sortIcon field="userId"></p-sortIcon>
+                </th>
+                <th pSortableColumn="firstName">FirstName <p-sortIcon field="firstName"></p-sortIcon>
+                </th>
+                <th pSortableColumn="lastName">LastName <p-sortIcon field="lastName"></p-sortIcon>
+                </th>
+                <th pSortableColumn="username">Username <p-sortIcon field="username"></p-sortIcon>
+                </th>
+                <th pSortableColumn="email">Email ID<p-sortIcon field="email"></p-sortIcon>
+                </th>
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-user>
+            <tr>
+                <td>
+                    <p-tableCheckbox [value]="user"></p-tableCheckbox>
+                </td>
+                <td>{{user.userId}}</td>
+                <td>{{user.firstName }}</td>
+                <td>{{user.lastName}}</td>
+                <td>{{user.username}}</td>
+                <td>{{user.email}}</td>
+
+                <td>
+                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2"
+                        (click)="editUser(user)"></button>
+                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
+                        (click)="deleteUser(user)"></button>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="p-d-flex p-ai-center p-jc-between">
+                In total there are {{products ? products.length : 0 }} products.
+            </div>
+        </ng-template>
+    </p-table>
+
+
+</div>
+<!--
+<p-dialog [(visible)]="productDialog" [style]="{width: '450px'}" header="Product Details" [modal]="true"
+    styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <div class="p-field">
+            <label for="name">Name</label>
+            <input type="text" pInputText id="name" [(ngModel)]="product.name" required autofocus />
+            <small class="p-invalid" *ngIf="submitted && !product.name">Name is required.</small>
+        </div>
+        <div class="p-field">
+            <label for="description">Description</label>
+            <textarea id="description" pInputTextarea [(ngModel)]="product.description" required rows="3"
+                cols="20"></textarea>
+        </div>
+
+        <div class="p-field">
+            <label class="p-mb-3">Category</label>
+            <div class="p-formgrid p-grid">
+                <div class="p-field-radiobutton p-col-6">
+                    <p-radioButton id="category1" name="category" value="Accessories" [(ngModel)]="product.category">
+                    </p-radioButton>
+                    <label for="category1">Accessories</label>
+                </div>
+                <div class="p-field-radiobutton p-col-6">
+                    <p-radioButton id="category2" name="category" value="Clothing" [(ngModel)]="product.category">
+                    </p-radioButton>
+                    <label for="category2">Clothing</label>
+                </div>
+                <div class="p-field-radiobutton p-col-6">
+                    <p-radioButton id="category3" name="category" value="Electronics" [(ngModel)]="product.category">
+                    </p-radioButton>
+                    <label for="category3">Electronics</label>
+                </div>
+                <div class="p-field-radiobutton p-col-6">
+                    <p-radioButton id="category4" name="category" value="Fitness" [(ngModel)]="product.category">
+                    </p-radioButton>
+                    <label for="category4">Fitness</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="p-formgrid p-grid">
+            <div class="p-field p-col">
+                <label for="price">Price</label>
+                <p-inputNumber id="price" [(ngModel)]="product.price" mode="currency" currency="USD" locale="en-US">
+                </p-inputNumber>
+            </div>
+            <div class="p-field p-col">
+                <label for="quantity">Quantity</label>
+                <p-inputNumber id="quantity" [(ngModel)]="product.quantity"></p-inputNumber>
+            </div>
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveProduct()"></button>
+    </ng-template>
+</p-dialog> -->
+
+
+<p-dialog [(visible)]="userDialog" [style]="{width: '450px'}" header="Product Details" [modal]="true"
+    styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <div class="p-field">
+            <label for="userId">UserId</label>
+            <input type="text" pInputText id="userId" [(ngModel)]="user.userId" required autofocus />
+            <small class="p-invalid" *ngIf="submitted && !user.userId">userId is required.</small>
+        </div>
+        <div class="p-field">
+            <label for="firstName">FirstName</label>
+            <input type="text" pInputText id="firstName" [(ngModel)]="user.firstName" required autofocus />
+            <small class="p-invalid" *ngIf="submitted && !user.firstName">firstName is required.</small>
+        </div>
+        <div class="p-field">
+            <label for="lastName">LastName</label>
+            <input type="text" pInputText id="lastName" [(ngModel)]="user.lastName" required autofocus />
+            <small class="p-invalid" *ngIf="submitted && !user.lastName">lastName is required.</small>
+        </div>
+        <div class="p-field">
+            <label for="username">UserName</label>
+            <input type="text" pInputText id="username" [(ngModel)]="user.username" required autofocus />
+            <small class="p-invalid" *ngIf="submitted && !user.username">username is required.</small>
+        </div>
+        <div class="p-field">
+            <label for="password">Password</label>
+            <input type="password" pInputText id="password" [(ngModel)]="user.password" required autofocus />
+            <small class="p-invalid" *ngIf="submitted && !user.password">password is required.</small>
+        </div>
+
+        <div class="p-field">
+            <label for="email">Email Id</label>
+            <input type="text" pInputText id="email" [(ngModel)]="user.email" required autofocus />
+            <small class="p-invalid" *ngIf="submitted && !user.email">email is required.</small>
+        </div>
+
+
+        <div class="p-field">
+            <label class="p-mb-3">Role</label>
+            <div class="p-formgrid p-grid">
+                <div class="p-field-radiobutton p-col-6">
+                    <p-radioButton id="USER" name="role" value="USER" [(ngModel)]="user.role">
+                    </p-radioButton>
+                    <label for="category1">USER</label>
+                </div>
+                <div class="p-field-radiobutton p-col-6">
+                    <p-radioButton id="ADMIN" name="role" value="ADMIN" [(ngModel)]="user.role">
+                    </p-radioButton>
+                    <label for="category2">ADMIN</label>
+                </div>
+
+            </div>
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text"
+            (click)="hideUserDialog()"></button>
+        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveUser()"></button>
+    </ng-template>
+</p-dialog>
+
+
+
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+<!-- <table tuiTable class="table" [columns]="columns">
+  <thead>
+      <tr tuiThGroup>
+          <th tuiTh>Name</th>
+          <th tuiTh>Balance</th>
+      </tr>
+  </thead>
+  <tbody tuiTbody [data]="data">
+      <tr *tuiRow="let item of data" tuiTr>
+          <td *tuiCell="'balance'" tuiTd>
+              {{item.balance}}
+          </td>
+      </tr>
+  </tbody>
+</table> -->
+<!--
+<div class="tui-container">
+  <div class="stepper">
+      <tui-stepper [activeItemIndex]="0">
+          <button tuiStep>First step</button>
+          <button tuiStep [disabled]="true">Second step</button>
+          <button tuiStep [disabled]="true">Third step</button>
+          <button tuiStep [disabled]="true">Fourth step</button>
+      </tui-stepper>
+  </div>
+  <form [formGroup]="testForm">
+      <div class="tui-row tui-row_sme">
+          <div class="tui-col_8">
+              <h3 class="tui-form__header tui-form__header_margin-top_none">
+                  A header
+              </h3>
+              <div class="tui-form__row">
+                  <tui-input
+                      tuiTextfieldExampleText="Field placeholder"
+                      formControlName="nameValue"
+                      tuiHintContent="A tooltip"
+                  >
+                      Textfield<span class="tui-required"></span>
+                  </tui-input>
+                  <tui-field-error
+                      formControlName="nameValue"
+                  ></tui-field-error>
+              </div>
+              <div class="tui-form__row">
+                  <tui-input-date
+                      tuiTextfieldExampleText="Placeholder"
+                      formControlName="periodValue"
+                  >
+                      Input date<span class="tui-required"></span>
+                  </tui-input-date>
+                  <tui-field-error
+                      formControlName="periodValue"
+                  ></tui-field-error>
+              </div>
+              <div class="tui-form__row tui-form__row_multi-fields">
+                  <div class="tui-form__multi-field">
+                      <tui-input-password formControlName="passwordValue">
+                          Input password
+                      </tui-input-password>
+                      <tui-field-error
+                          formControlName="passwordValue"
+                      ></tui-field-error>
+                  </div>
+                  <div class="tui-form__multi-field">
+                      <tui-input-number
+                          formControlName="moneyValue"
+                          [postfix]="'RUB' | tuiCurrency"
+                      >
+                          Input money
+                      </tui-input-number>
+                      <tui-field-error
+                          formControlName="moneyValue"
+                      ></tui-field-error>
+                  </div>
+              </div>
+              <div class="tui-form__row">
+                  <tui-input-slider
+                      formControlName="quantityValue"
+                      [min]="50000"
+                      [max]="3000000"
+                      [pluralize]="['₽', '₽', '₽']"
+                      [segments]="1"
+                      [segmentsPluralize]="['₽', '₽', '₽']"
+                  >
+                      Some slider
+                  </tui-input-slider>
+                  <div class="tui-form__field-note">Some additional text</div>
+                  <tui-field-error
+                      formControlName="quantityValue"
+                  ></tui-field-error>
+              </div>
+              <div class="tui-form__row tui-form__row_multi-fields">
+                  <div class="tui-form__multi-field">
+                      <tui-select
+                          formControlName="personValue"
+                          [valueContent]="personValueContent"
+                      >
+                          Choose a person
+                          <tui-data-list-wrapper
+                              *tuiDataList
+                              [items]="persons"
+                          ></tui-data-list-wrapper>
+                      </tui-select>
+                      <ng-template #personValueContent let-data>
+                          <div class="uppercase-name">
+                              {{data.firstName}} {{data.lastName}}
+                          </div>
+                      </ng-template>
+                      <tui-field-error
+                          formControlName="personValue"
+                      ></tui-field-error>
+                  </div>
+                  <div class="tui-form__multi-field">
+                      <tui-input-phone formControlName="phoneValue">
+                          Input phone
+                      </tui-input-phone>
+                      <tui-field-error
+                          formControlName="phoneValue"
+                      ></tui-field-error>
+                  </div>
+              </div>
+              <h3 class="tui-form__header">Header</h3>
+              <div
+                  tuiGroup
+                  class="tui-form__row"
+                  [adaptive]="true"
+                  [collapsed]="true"
+              >
+                  <tui-radio-block
+                      contentAlign="right"
+                      formControlName="radioValue"
+                      item="with-commission"
+                      size="l"
+                  >
+                      One option
+                  </tui-radio-block>
+                  <tui-radio-block
+                      contentAlign="right"
+                      formControlName="radioValue"
+                      item="without-commission"
+                      size="l"
+                  >
+                      An alternative one
+                  </tui-radio-block>
+              </div>
+              <div class="tui-form__row tui-form__row_half-width">
+                  <tui-input-time formControlName="timeValue">
+                      Input time
+                  </tui-input-time>
+              </div>
+              <div class="tui-form__row tui-form__row_checkboxes">
+                  <tui-checkbox-labeled
+                      class="tui-form__checkbox"
+                      formControlName="osnoValue"
+                      size="l"
+                  >
+                      First option
+                  </tui-checkbox-labeled>
+                  <tui-checkbox-labeled
+                      class="tui-form__checkbox"
+                      formControlName="usnValue"
+                      size="l"
+                  >
+                      Other option
+                  </tui-checkbox-labeled>
+                  <tui-checkbox-labeled
+                      class="tui-form__checkbox"
+                      formControlName="eshnValue"
+                      size="l"
+                  >
+                      Cool option
+                  </tui-checkbox-labeled>
+                  <tui-checkbox-labeled
+                      class="tui-form__checkbox"
+                      formControlName="envdValue"
+                      size="l"
+                  >
+                      Your personal option
+                  </tui-checkbox-labeled>
+                  <tui-checkbox-labeled
+                      class="tui-form__checkbox"
+                      formControlName="usn2Value"
+                      size="l"
+                  >
+                      Doubtful option
+                  </tui-checkbox-labeled>
+                  <tui-checkbox-labeled
+                      class="tui-form__checkbox"
+                      formControlName="patentValue"
+                      size="l"
+                  >
+                      One more value
+                  </tui-checkbox-labeled>
+              </div>
+              <h3
+                  class="tui-form__header tui-form__header_margin-bottom_small"
+              >
+                  Header
+              </h3>
+              <div class="tui-form__row">
+                  <label tuiLabel label="From">
+                      <tui-select
+                          class="accounts-select"
+                          formControlName="accountWherefrom"
+                          [tuiTextfieldLabelOutside]="true"
+                          [valueContent]="accountContent"
+                      >
+                          Choose an account
+                          <tui-data-list-wrapper
+                              *tuiDataList
+                              [items]="accounts"
+                              [itemContent]="accountContent"
+                          ></tui-data-list-wrapper>
+                      </tui-select>
+                  </label>
+              </div>
+              <div class="tui-form__row">
+                  <label tuiLabel label="To">
+                      <tui-select
+                          class="accounts-select"
+                          formControlName="accountWhere"
+                          [tuiTextfieldLabelOutside]="true"
+                          [valueContent]="accountContent"
+                      >
+                          Choose an account
+                          <tui-data-list-wrapper
+                              *tuiDataList
+                              [items]="accounts"
+                              [itemContent]="accountContent"
+                          ></tui-data-list-wrapper>
+                      </tui-select>
+                  </label>
+              </div>
+              <h3 class="tui-form__header">Header</h3>
+              <div class="tui-form__row">
+                  <tui-input
+                      tuiTextfieldExampleText="Placeholder"
+                      formControlName="textValue"
+                      tuiHintContent="A tooltip"
+                  >
+                      Textfield
+                  </tui-input>
+                  <div class="tui-form__field-checkbox">
+                      <tui-checkbox-labeled
+                          formControlName="checkboxValue"
+                          size="l"
+                      >
+                          Try this
+                      </tui-checkbox-labeled>
+                  </div>
+              </div>
+              <div class="tui-form__buttons">
+                  <button
+                      tuiButton
+                      class="tui-form__button"
+                      size="l"
+                      type="submit"
+                  >
+                      Submit
+                  </button>
+                  <button
+                      tuiButton
+                      type="button"
+                      class="tui-form__button"
+                      appearance="flat"
+                      size="l"
+                  >
+                      Cancel
+                  </button>
+              </div>
+          </div>
+      </div>
+      <ng-template #accountContent let-account>
+          <span class="account">
+              {{account.name}}
+              <tui-money [value]="account.amount"></tui-money>
+          </span>
+      </ng-template>
+  </form>
+</div>
+ -->
