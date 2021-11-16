@@ -1,58 +1,51 @@
 <p-toast></p-toast>
-<div>
-  <p-toolbar styleClass="p-mb-4 " class="mx-5 bg-gray-800">
-    <ng-template
-      pTemplate="left"
-      class="bg-gray-800"
-      style="background-color: dimgray"
-    >
+
+<div class="card">
+  <p-toolbar styleClass="p-mb-4 " class="mx-5">
+    <ng-template pTemplate="left">
       <h1 class="text-gray-600">All FCMPusher APP</h1>
     </ng-template>
 
-    <ng-template pTemplate="right">
-    </ng-template>
+    <ng-template pTemplate="right"> </ng-template>
   </p-toolbar>
-  <p-toolbar styleClass="p-mb-4 text-gray-600">
+  <p-toolbar styleClass="p-mb-4">
     <ng-template pTemplate="left">
-      <!-- <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2"
-                (click)="openNew()"></button> -->
       <button
-        pButton
-        title="Back"
-        icon="pi pi-chevron-left"
-        class="mx-1 p-button-outlined"
-        (click)="back()"
-      ></button>
+      pButton
+      title="Back"
+      icon="pi pi-chevron-left"
+      class="mx-1 p-button-outlined"
+      (click)="back()"
+    ></button>
       <button
         pButton
         pRipple
-        label="New Organization"
+        label="New Product"
         icon="pi pi-plus"
         class="p-button-success p-button-outlined p-mr-2"
         (click)="newUser()"
       ></button>
     </ng-template>
 
-    <ng-template pTemplate="right">
-        </ng-template>
+    <ng-template pTemplate="right"> </ng-template>
   </p-toolbar>
 
-  {{organization.length}}
+  {{ products.length }}
   <p-table
     #dt
-    [value]="organization"
+    [value]="products"
     [rows]="10"
     [paginator]="true"
-    [(selection)]="selectedOrganization"
+    [(selection)]="selectedProducts"
     [rowHover]="true"
     dataKey="id"
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
     [showCurrentPageReport]="true"
-    *ngIf="organization?.length > 0"
+    *ngIf="products?.length > 0"
   >
     <ng-template pTemplate="caption">
       <div class="p-d-flex p-ai-center p-jc-between">
-        <h5 class="p-m-0">Manage Organization</h5>
+        <h5 class="p-m-0">Manage Product</h5>
         <span class="p-input-icon-left">
           <i class="pi pi-search"></i>
           <input
@@ -69,12 +62,14 @@
         <th style="width: 3rem">
           <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
         </th>
-        <!-- <th pSortableColumn="orgId">Org Id <p-sortIcon field="orgId"></p-sortIcon>
+        <!--      <th pSortableColumn="id">Product Id <p-sortIcon field="id"></p-sortIcon>
                 </th> -->
-        <th pSortableColumn="orgName">
-          OrgName <p-sortIcon field="orgName"></p-sortIcon>
+        <th pSortableColumn="productName">
+          Product Name <p-sortIcon field="productName"></p-sortIcon>
         </th>
-        <!--  <th pSortableColumn="user">user <p-sortIcon field="user"></p-sortIcon>
+        <!--   <th pSortableColumn="user">user Id <p-sortIcon field="user"></p-sortIcon>
+                </th>
+                <th pSortableColumn="organization">organization Id <p-sortIcon field="organization"></p-sortIcon>
                 </th> -->
         <th pSortableColumn="isActive">
           Active <p-sortIcon field="isActive"></p-sortIcon>
@@ -92,14 +87,15 @@
         style="cursor: pointer"
       >
         <td>
-          <p-tableCheckbox [value]="organization"></p-tableCheckbox>
+          <p-tableCheckbox [value]="products"></p-tableCheckbox>
         </td>
-        <!--
-                <td>{{user.id}}</td> -->
-        <td>{{user.orgName }}</td>
-        <!--        <td>{{user.user}}</td> -->
-        <td>{{user.isActive}}</td>
-        <td>{{user.isDeleted}}</td>
+
+        <!--    <td>{{user.id}}</td> -->
+        <td>{{ user.productName }}</td>
+        <!--     <td>{{user.user}}</td>
+                <td>{{user.organization}}</td> -->
+        <td>{{ user.isActive }}</td>
+        <td>{{ user.isDeleted }}</td>
 
         <td>
           <button
@@ -121,8 +117,7 @@
     </ng-template>
     <ng-template pTemplate="summary">
       <div class="p-d-flex p-ai-center p-jc-between">
-        In total there are {{organization ? organization.length : 0 }}
-        organization.
+        In total there are {{ products ? products.length : 0 }} organization.
       </div>
     </ng-template>
   </p-table>
@@ -130,26 +125,29 @@
 
 <p-dialog
   [(visible)]="userDialog"
-  [style]="{width: '450px'}"
-  header="Organization Details"
+  [style]="{ width: '450px' }"
+  header="Product Details"
   [modal]="true"
   styleClass="p-fluid"
 >
   <ng-template pTemplate="content">
     <div class="p-field">
-      <label for="orgName">Organization Name</label>
+      <label for="productName">Product Name</label>
       <input
         type="text"
         pInputText
-        id="orgName"
-        [(ngModel)]="newOrg.orgName"
+        id="productName"
+        [(ngModel)]="newProduct.productName"
         required
         autofocus
       />
-      <small class="p-invalid" *ngIf="submitted && !newOrg.orgName"
-        >Organization Name is required.</small
+      <small class="p-invalid" *ngIf="submitted && !newProduct.productName"
+        >productName is required.</small
       >
     </div>
+
+
+
   </ng-template>
 
   <ng-template pTemplate="footer">
@@ -172,5 +170,4 @@
   </ng-template>
 </p-dialog>
 
-<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
-
+<p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>

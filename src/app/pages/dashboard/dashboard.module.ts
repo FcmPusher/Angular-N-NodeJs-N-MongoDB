@@ -33,9 +33,11 @@ import { ToastModule } from 'primeng/toast';
 import { ToolbarModule } from 'primeng/toolbar';
 import { DashboardPage } from './dashboard.page';
 import { DashboardService } from './dashboard.service';
+import { FragmentComponent } from './fragment/fragment.component';
+import { ProductComponent } from './product/product.component';
 
 @NgModule({
-  declarations: [DashboardPage],
+  declarations: [DashboardPage,ProductComponent, FragmentComponent],
   imports: [
     CommonModule,
     TableModule,
@@ -75,6 +77,22 @@ import { DashboardService } from './dashboard.service';
         component: DashboardPage,
         data: {
           title: 'Dashboard',
+          robots: 'noindex, nofollow',
+        },
+      },
+      {
+        path: 'product/:id',
+        component: ProductComponent,
+        data: {
+          title: 'Product',
+          robots: 'noindex, nofollow',
+        },
+      },
+      {
+        path: 'product/:id/fragment/:id',
+        component: FragmentComponent,
+        data: {
+          title: 'Fragment',
           robots: 'noindex, nofollow',
         },
       },

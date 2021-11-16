@@ -139,7 +139,14 @@ export class DashboardService {
     return Math.floor(Math.random() * Math.floor(5) + 1);
   }
   getUserList(): Observable<any> {
-    return this.http.get(this.baseUrl + 'users', this.requestOptions());
+    return this.http.get('http://localhost:3000/v1/organization/?user=613e06986dfdcf25f8c61576&sortBy=asc&limit=1&page=1', this.requestOptions());
+  }
+
+  getProductList(id:any) : Observable<any>{
+    return this.http.get('http://localhost:3000/v1/product/?user='+id+'&sortBy=asc&limit=1&page=1', this.requestOptions());
+  }
+  getFragmentList(id:any) : Observable<any>{
+    return this.http.get('http://localhost:3000/v1/fragment/?product='+id+'&sortBy=asc&limit=1&page=1', this.requestOptions());
   }
 
   getSave(user: any): Observable<any> {
@@ -187,10 +194,15 @@ export class DashboardService {
     );
   }
   private requestOptions() {
-    const headers = new HttpHeaders({
+   /*  const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization:
         'Bearer ' + JSON.parse(this.globalDataService.getToken()).access_token,
+    }); */
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization:
+        'Bearer ',
     });
     const httpOptions = { headers: headers };
     return httpOptions;
