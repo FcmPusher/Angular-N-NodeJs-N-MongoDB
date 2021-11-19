@@ -139,14 +139,14 @@ export class DashboardService {
     return Math.floor(Math.random() * Math.floor(5) + 1);
   }
   getUserList(): Observable<any> {
-    return this.http.get('http://localhost:3000/v1/organization/?user=613e06986dfdcf25f8c61576&sortBy=asc&limit=1&page=1', this.requestOptions());
+    return this.http.get(this.baseUrl+"organization/?user=613e06986dfdcf25f8c61576&sortBy=asc&limit=1&page=1", this.requestOptions());
   }
 
   getProductList(id:any) : Observable<any>{
-    return this.http.get('http://localhost:3000/v1/product/?user='+id+'&sortBy=asc&limit=1&page=1', this.requestOptions());
+    return this.http.get(this.baseUrl+"product/?user="+id+"&sortBy=asc&limit=1&page=1", this.requestOptions());
   }
   getFragmentList(id:any) : Observable<any>{
-    return this.http.get('http://localhost:3000/v1/fragment/?product='+id+'&sortBy=asc&limit=1&page=1', this.requestOptions());
+    return this.http.get(this.baseUrl+"fragment/?product="+id+"&sortBy=asc&limit=1&page=1", this.requestOptions());
   }
 
   getSave(user: any): Observable<any> {
