@@ -62,7 +62,6 @@ import { ProductComponent } from './product/product.component';
     ToastModule,
     InputTextModule,
     ProgressBarModule,
-    HttpClientModule,
     FileUploadModule,
     ToolbarModule,
     RatingModule,
