@@ -6,7 +6,7 @@ describe('NotificationService', () => {
   let service: NotificationService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({ teardown: { destroyAfterEach: false } });
     service = TestBed.inject(NotificationService);
   });
 

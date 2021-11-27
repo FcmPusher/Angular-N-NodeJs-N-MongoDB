@@ -8,8 +8,9 @@ describe('FragmentComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FragmentComponent ]
-    })
+    declarations: [FragmentComponent],
+    teardown: { destroyAfterEach: false }
+})
     .compileComponents();
   });
 

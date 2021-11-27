@@ -1,4 +1,4 @@
-<p-toast></p-toast>
+
 <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
   <!-- component -->
   <div class="flex flex-col min-h-screen bg-grey-lighter">
@@ -10,7 +10,6 @@
         <tui-input
           class="block w-full p-3 mb-4 border rounded b-form border-grey-light"
           tuiHintContent="Type 5 letters or more"
-
           formControlName="userName"
         >
           Type a Full Name
@@ -27,7 +26,6 @@
         <tui-input-password
           class="block w-full p-3 mb-4 border rounded b-form border-grey-light"
           tuiHintContent="Type 5 letters or more"
-
           formControlName="password"
         >
           Type a Password
@@ -37,7 +35,6 @@
         <tui-input-password
           class="block w-full p-3 mb-4 border rounded b-form border-grey-light"
           tuiHintContent="Type 5 letters or more"
-
           formControlName="cpassword"
         >
           Type a confirm password
@@ -74,7 +71,10 @@
 
       <div class="mt-6 text-grey-dark">
         Already have an account?
-        <a class="no-underline border-b border-blue text-blue" routerLink="/auth/sign-in">
+        <a
+          class="no-underline border-b border-blue text-blue"
+          routerLink="/auth/sign-in"
+        >
           Log in </a
         >.
       </div>

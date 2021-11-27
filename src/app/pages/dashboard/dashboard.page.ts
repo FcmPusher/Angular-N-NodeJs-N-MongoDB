@@ -2,6 +2,7 @@ import { Location } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NotificationService } from '@app/@core/services/notification/notification.service';
+import { RouterService } from '@app/@core/services/router/router.service';
 import { getItem, StorageItem } from '@app/@core/utils';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { DashboardService } from './dashboard.service';
@@ -60,6 +61,7 @@ export class DashboardPage implements OnInit {
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
     private _notificationService: NotificationService,
+    private routerService:RouterService,
     private _location: Location,
   ) {}
 
@@ -140,7 +142,8 @@ export class DashboardPage implements OnInit {
   }
   onClick(event: any): void {
     console.log(event);
-    this.router.navigate(['dashboard/product/' + event.user]);
+    this.routerService.navigate('dashboard/product/' + event.user);
+    //this.router.navigate(['dashboard/product/' + event.user]);
   }
   editProduct(product: Product) {
     this.product = { ...product };

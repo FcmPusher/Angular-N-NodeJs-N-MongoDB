@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { GeneralService } from '@app/@core/services/general/general.service';
 import { NotificationService } from '@app/@core/services/notification/notification.service';
 import { TuiButtonModule, TuiErrorModule, TuiLinkModule } from '@taiga-ui/core';
 import {
@@ -9,6 +10,8 @@ import {
   TuiInputModule,
   TuiInputPasswordModule
 } from '@taiga-ui/kit';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 import { AuthRoutingModule } from './auth-routing.module';
 import { ForgotPasswordPage } from './pages/forgot-password/forgot-password.page';
 import { PasswordResetFailedPage } from './pages/password-reset-failed/password-reset-failed.page';
@@ -37,8 +40,9 @@ import { SignUpPage } from './pages/sign-up/sign-up.page';
     TuiErrorModule,
     TuiFieldErrorModule,
     HttpClientModule,
+    ToastModule,
   ],
-  providers: [NotificationService],
+  providers: [MessageService, ConfirmationService, NotificationService,GeneralService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AuthModule {}
