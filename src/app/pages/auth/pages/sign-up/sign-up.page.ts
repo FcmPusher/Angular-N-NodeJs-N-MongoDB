@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { GeneralService } from '@app/@core/services/general/general.service';
 import { GlobalService } from '@app/@core/services/global/global.service';
+import { NotificationService } from '@app/@core/services/notification/notification.service';
 import { AuthService } from '../../services/auth.service';
 @Component({
   templateUrl: './sign-up.page.html',
@@ -14,6 +15,7 @@ export class SignUpPage {
     private authService: AuthService,
     private globalService: GlobalService,
     private generalService: GeneralService,
+    private notification:NotificationService
   ) {}
   signUpForm = new FormGroup({
     userName: new FormControl('', [
