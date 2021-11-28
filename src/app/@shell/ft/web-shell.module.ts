@@ -8,6 +8,7 @@ import { FooterModule } from '../ui/footer/footer.module';
 import { HeaderModule } from '../ui/header/header.module';
 import { LayoutModule } from '../ui/layout/layout.module';
 import { NotFoundPage } from '../ui/not-found/not-found.page';
+import { ValidationMesssagesModule } from '../ui/validation-messsages/validation-messsages.module';
 
 const APP_ROUTES: Routes = [
   {
@@ -52,6 +53,7 @@ const APP_ROUTES: Routes = [
     CommonModule,
     RouterModule.forRoot(APP_ROUTES),
     FooterModule,
+    ValidationMesssagesModule,
     HeaderModule,
     LayoutModule,
     NotFoundModule,
@@ -59,6 +61,7 @@ const APP_ROUTES: Routes = [
   exports: [
     RouterModule,
     FooterModule,
+    ValidationMesssagesModule,
     HeaderModule,
     LayoutModule,
     NotFoundModule,

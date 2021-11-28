@@ -31,6 +31,7 @@ export class SignInPage {
     password: new FormControl('', [
       Validators.required,
       Validators.minLength(5),
+
     ]),
   });
   onSubmit() : void {

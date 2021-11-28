@@ -1,7 +1,9 @@
 
 <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
   <!-- component -->
-  <p-toast [breakpoints]="{'920px': {width: '100%', right: '0', left: '0'}}"></p-toast>
+  <p-toast
+    [breakpoints]="{'920px': {width: '100%', right: '0', left: '0'}}"
+  ></p-toast>
   <div class="flex flex-col min-h-screen bg-grey-lighter">
     <div
       class="container flex flex-col items-center justify-center flex-1 max-w-sm px-2 mx-auto "
@@ -13,10 +15,12 @@
           tuiHintContent="Type 5 letters or more"
           formControlName="userName"
         >
-          Type a Full Name
+          {{ 'fullname' | transloco }}
         </tui-input>
 
-        <tui-field-error formControlName="userName"></tui-field-error>
+      <!--   <tui-field-error [control]="signUpForm.controls.userName" formControlName="userName"></tui-field-error> -->
+      <app-validation-message [control]="signUpForm.controls.userName"></app-validation-message>
+
         <tui-input
           class="block w-full p-3 mb-4 border rounded border-grey-light"
           formControlName="email"

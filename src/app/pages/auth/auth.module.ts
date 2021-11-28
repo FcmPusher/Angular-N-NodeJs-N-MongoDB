@@ -4,6 +4,8 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GeneralService } from '@app/@core/services/general/general.service';
 import { NotificationService } from '@app/@core/services/notification/notification.service';
+import { ValidationMesssagesModule } from '@app/@shell/ui/validation-messsages/validation-messsages.module';
+import { TranslocoRootModule } from '@app/transloco-root.module';
 import { TuiButtonModule, TuiErrorModule, TuiLinkModule } from '@taiga-ui/core';
 import {
   TuiFieldErrorModule,
@@ -41,6 +43,8 @@ import { SignUpPage } from './pages/sign-up/sign-up.page';
     TuiFieldErrorModule,
     HttpClientModule,
     ToastModule,
+    TranslocoRootModule,
+    ValidationMesssagesModule
   ],
   providers: [MessageService, ConfirmationService, NotificationService,GeneralService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
