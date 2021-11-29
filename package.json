@@ -14,7 +14,8 @@
     "test:coverage": "ng test --coverage",
     "lint": "ng lint",
     "analyze": "webpack-bundle-analyzer dist/angular-boilerplate/stats.json",
-    "release": "standard-version"
+    "release": "standard-version",
+    "prebuild": "npm --no-git-tag-version version patch"
   },
   "dependencies": {
     "@angular/animations": "13.0.2",
