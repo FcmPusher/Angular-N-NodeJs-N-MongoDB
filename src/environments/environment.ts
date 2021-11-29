@@ -5,9 +5,8 @@
 export const environment = {
   production: false,
   //apiUrl: 'http://localhost:3000/v1/',
- apiUrl: 'https://fcmpusher.herokuapp.com/v1/',
-
-
+  appVersion: require('../../package.json').version + '-dev',
+  apiUrl: 'https://fcmpusher.herokuapp.com/v1/',
 };
 
 /*
