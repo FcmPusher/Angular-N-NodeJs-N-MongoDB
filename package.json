@@ -13,7 +13,8 @@
     "test:e2e": "ng e2e",
     "test:coverage": "ng test --coverage",
     "lint": "ng lint",
-    "analyze": "webpack-bundle-analyzer dist/angular-boilerplate/stats.json"
+    "analyze": "webpack-bundle-analyzer dist/angular-boilerplate/stats.json",
+    "release": "standard-version"
   },
   "dependencies": {
     "@angular/animations": "13.0.2",
@@ -46,6 +47,7 @@
     "primeng": "^12.1.1",
     "rxjs": "7.4.0",
     "rxjs-compat": "^6.6.7",
+    "standard-version": "^9.3.2",
     "tslib": "2.2.0",
     "zone.js": "0.11.4"
   },
