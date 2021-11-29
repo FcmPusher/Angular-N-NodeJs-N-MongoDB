@@ -301,6 +301,6 @@ yarn remove tailwindcss autoprefixer postcss
 | lint          | Use ESLint to lint your app                                    | npm run lint          | yarn lint          | ng lint                                                     |
 | analyze       | Open webpack-bundle-analyzer                                   | npm run analyze       | yarn analyze       | webpack-bundle-analyzer dist/angular-boilerplate/stats.json |
 
-
+npm version patch
 ng build --prod --base-href "https://fcmpusher.github.io/Angular-N-NodeJs-N-MongoDB/"
 npx angular-cli-ghpages --dir=dist/angular-boilerplate
