@@ -1,6 +1,7 @@
 import { Location } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { GeneralService } from '@app/@core/services/general/general.service';
 import { NotificationService } from '@app/@core/services/notification/notification.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { DashboardService } from '../dashboard.service';
@@ -36,7 +37,7 @@ export class ProductComponent implements OnInit {
   productDialog: boolean;
   products: Product[];
   selectedProducts: Product[];
-  public newProduct:Product;
+  public newProduct: Product;
   submitted: boolean;
   users: Users[];
   selectedUsers: Users[];
@@ -52,10 +53,12 @@ export class ProductComponent implements OnInit {
     private _notificationService: NotificationService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
-    private _location: Location
+    private _location: Location,
+    private generalService: GeneralService,
   ) {}
 
   ngOnInit(): void {
+    this.generalService.show();
     this.id = this.route.snapshot.paramMap.get('id');
     console.log(this.id);
     this.getProductList(this.id);
@@ -71,11 +74,13 @@ export class ProductComponent implements OnInit {
         this.products = res.results;
         console.log(this.products);
         this.loading = false;
+        this.generalService.hide();
       },
       (error) => {
         this.loading = false;
         this._notificationService.error(error.message);
         console.log(error);
+        this.generalService.restError(error);
       },
     );
   }
@@ -86,7 +91,7 @@ export class ProductComponent implements OnInit {
     this.productDialog = true;
   }
   newUser() {
-   // this.newProduct = {};
+    // this.newProduct = {};
     this.userSubmitted = false;
     this.userDialog = true;
   }
@@ -156,11 +161,16 @@ export class ProductComponent implements OnInit {
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.products = this.products.filter(val => val.id !== product.id);
-      //  this.product = {};
+        this.products = this.products.filter((val) => val.id !== product.id);
+        //  this.product = {};
 
-        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Product Deleted', life: 3000 });
-      }
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Successful',
+          detail: 'Product Deleted',
+          life: 3000,
+        });
+      },
     });
   }
   hideDialog() {
@@ -172,71 +182,82 @@ export class ProductComponent implements OnInit {
     this.userSubmitted = false;
   }
   saveUser() {
-    debugger
+    debugger;
     console.log(this.newProduct);
-    if (this.newProduct.productName == (null || undefined ||'')) {
+    if (this.newProduct.productName == (null || undefined || '')) {
       const request = {
-
-        "productName": this.newProduct.productName,
-
-      }
+        productName: this.newProduct.productName,
+      };
       this.productService.getSave(request).subscribe(
         (res) => {
           console.log(res);
-        //  this.getUserList();
-          this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'User save', life: 3000 });
+          //  this.getUserList();
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Successful',
+            detail: 'User save',
+            life: 3000,
+          });
           this.userDialog = false;
           this.userSubmitted = false;
-
-        }, (error) => {
+        },
+        (error) => {
           // this.loading = false;
           //this._notificationService.error(error.message);
           console.log(error);
-          this.messageService.add({ severity: 'danger', summary: 'Failed', detail: 'User save failed', life: 3000 });
+          this.messageService.add({
+            severity: 'danger',
+            summary: 'Failed',
+            detail: 'User save failed',
+            life: 3000,
+          });
           this.userDialog = false;
           this.userSubmitted = false;
-
-        }
+        },
       );
-
     } else {
       const request = {
-        "userId": this.user.userId,
-        "firstName": this.user.firstName,
-        "lastName": this.user.lastName,
-        "username": this.user.username,
-        "password": this.user.password,
-        "email": this.user.email,
-        "role": [
-          this.user.role
-        ]
-      }
+        userId: this.user.userId,
+        firstName: this.user.firstName,
+        lastName: this.user.lastName,
+        username: this.user.username,
+        password: this.user.password,
+        email: this.user.email,
+        role: [this.user.role],
+      };
       this.productService.updateUser(request).subscribe(
         (res) => {
           console.log(res);
           //this.getUserList();
-          this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Update User', life: 3000 });
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Successful',
+            detail: 'Update User',
+            life: 3000,
+          });
           this.userDialog = false;
           this.userSubmitted = false;
-
-        }, (error) => {
+        },
+        (error) => {
           // this.loading = false;
           //this._notificationService.error(error.message);
           console.log(error);
-          this.messageService.add({ severity: 'danger', summary: 'Failed', detail: 'Failed to update user', life: 3000 });
+          this.messageService.add({
+            severity: 'danger',
+            summary: 'Failed',
+            detail: 'Failed to update user',
+            life: 3000,
+          });
           this.userDialog = false;
           this.userSubmitted = false;
-
-        }
+        },
       );
-
     }
-
-
   }
   createId(): string {
     let id = '';
-    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const chars =
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     for (let i = 0; i < 5; i++) {
       id += chars.charAt(Math.floor(Math.random() * chars.length));
     }
@@ -245,7 +266,7 @@ export class ProductComponent implements OnInit {
   saveProduct() {
     this.submitted = true;
 
- /*    if (this.product.name.trim()) {
+    /*    if (this.product.name.trim()) {
       if (this.product.id) {
         this.products[this.findIndexById(this.product.id)] = this.product;
         this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Product Updated', life: 3000 });
@@ -273,9 +294,9 @@ export class ProductComponent implements OnInit {
 
     return index;
   }
-  onClick(event:any) : void{
+  onClick(event: any): void {
     console.log(event);
-    const url='dashboard/product/'+this.id+'/fragment/'+event.id;
+    const url = 'dashboard/product/' + this.id + '/fragment/' + event.id;
     this.router.navigate([url]);
   }
   back() {

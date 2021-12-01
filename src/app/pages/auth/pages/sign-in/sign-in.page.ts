@@ -22,7 +22,7 @@ export class SignInPage {
   }
 
   onClickSignIn(): void {
-    this.authService.signIn();
+    //  this.authService.signIn();
     this.router.navigate([this.returnUrl]);
   }
 
@@ -31,16 +31,16 @@ export class SignInPage {
     password: new FormControl('', [
       Validators.required,
       Validators.minLength(5),
-
     ]),
   });
-  onSubmit() : void {
-    this.authService.signIn();
+  onSubmit(): void {
+    //this.authService.signIn();
     this.router.navigate([this.returnUrl]);
     const createUserForm = {
       email: this.signInForm.controls['email'].value,
       password: this.signInForm.controls['password'].value,
     };
+    this.authService.signIn(createUserForm, this.returnUrl);
     console.log(createUserForm);
   }
 }

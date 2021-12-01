@@ -11,7 +11,7 @@ export class GeneralService {
   ) {}
 
   public navigate(url): void {
-    this.router.navigate([url]);
+    this.router.navigate(url);
   }
   public success(body: any): void {
     this.notification.success(body);

@@ -1,6 +1,7 @@
 import { Location } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { GeneralService } from '@app/@core/services/general/general.service';
 import { NotificationService } from '@app/@core/services/notification/notification.service';
 import { RouterService } from '@app/@core/services/router/router.service';
 import { getItem, StorageItem } from '@app/@core/utils';
@@ -61,17 +62,19 @@ export class DashboardPage implements OnInit {
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
     private _notificationService: NotificationService,
-    private routerService:RouterService,
+    private routerService: RouterService,
     private _location: Location,
+    private generalService: GeneralService,
   ) {}
 
   ngOnInit(): void {
     console.log('kamlesh');
-
+    this.generalService.show();
     this.isLoggedIn$ = !!getItem(StorageItem.Auth);
     console.log(this.isLoggedIn$);
     this.productService.getProducts().then((data) => (this.products = data));
     this.getUserList();
+    //this.generalService.hide();
   }
   openNew() {
     this.product = {};
@@ -181,7 +184,6 @@ export class DashboardPage implements OnInit {
     if (this.newOrg.orgName == (null || undefined || '')) {
       const request = {
         orgName: this.newOrg.orgName,
-
       };
       this.productService.getSave(request).subscribe(
         (res) => {
@@ -305,11 +307,13 @@ export class DashboardPage implements OnInit {
         //debugger;
         this.organization = res.results;
         console.log(this.organization);
+        this.generalService.hide();
       },
       (error) => {
         // this.loading = false;
         this._notificationService.error(error.message);
         console.log(error);
+        this.generalService.restError(error);
       },
     );
   }

@@ -1,6 +1,7 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { GeneralService } from '@app/@core/services/general/general.service';
 import { NotificationService } from '@app/@core/services/notification/notification.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { DashboardService } from '../dashboard.service';
@@ -49,10 +50,12 @@ export class FragmentComponent implements OnInit {
     private _notificationService: NotificationService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
-    private _location: Location
+    private _location: Location,
+    private generalService: GeneralService
   ) {}
 
   ngOnInit(): void {
+    this.generalService.show();
     this.id = this.route.snapshot.paramMap.get('id');
     console.log(this.id);
     this.getFragmentList(this.id);
@@ -68,11 +71,13 @@ export class FragmentComponent implements OnInit {
         this.fragments = res.results;
         console.log(this.fragments);
         this.loading = false;
+        this.generalService.hide();
       },
       (error) => {
         this.loading = false;
         this._notificationService.error(error.message);
         console.log(error);
+        this.generalService.restError(error);
       },
     );
   }

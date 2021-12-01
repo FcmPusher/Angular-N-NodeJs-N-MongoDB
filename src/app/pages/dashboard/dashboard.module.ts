@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { GeneralService } from '@app/@core/services/general/general.service';
 import { GlobalService } from '@app/@core/services/global/global.service';
 import { NotificationService } from '@app/@core/services/notification/notification.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
@@ -37,7 +38,7 @@ import { FragmentComponent } from './fragment/fragment.component';
 import { ProductComponent } from './product/product.component';
 
 @NgModule({
-  declarations: [DashboardPage,ProductComponent, FragmentComponent],
+  declarations: [DashboardPage, ProductComponent, FragmentComponent],
   imports: [
     CommonModule,
     TableModule,
@@ -97,7 +98,15 @@ import { ProductComponent } from './product/product.component';
       },
     ]),
   ],
-  providers: [DashboardService, MessageService, ConfirmationService, NotificationService,GlobalService],
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA],
+  providers: [
+    DashboardService,
+    MessageService,
+    ConfirmationService,
+    NotificationService,
+    GlobalService,
+    GeneralService,
+
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class DashboardModule {}
