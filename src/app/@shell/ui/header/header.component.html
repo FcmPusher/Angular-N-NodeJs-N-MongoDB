@@ -1,307 +1,189 @@
-<header
-  class="sticky top-0 w-full h-16 shadow-lg bg-opacity-10 bg-gray-50 dark:bg-gray-700 backdrop-blur-lg backdrop-filter"
->
-<p-toast [breakpoints]="{'920px': {width: '100%', right: '0', left: '0'}}"></p-toast>
-  <nav
-    class="container flex items-center justify-between h-full py-3 mx-auto center"
-  >
-    <a
-      [routerLink]="[path.home]"
-      class="text-2xl font-bold no-underline cursor-pointer"
-    >
-      <span class="text-gray-400">FCM</span>Pusher
-    </a>
+<p-toast
+  [breakpoints]="{ '920px': { width: '100%', right: '0', left: '0' } }"
+></p-toast>
+<!-- ***** Header Area Start ***** -->
+<header class="header-area header-sticky">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <!--     <nav class="main-nav">
 
-    <div class="flex items-center">
-      <!--  <a
-        href="https://github.com/juanmesa2097/angular-boilerplate"
-        title="Repository"
-        class="mr-6 btn btn-secondary"
-      >
-        <svg
-          aria-hidden="true"
-          focusable="false"
-          data-prefix="fab"
-          data-icon="github"
-          class="w-8"
-          role="img"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 496 512"
-        >
-          <path
-            fill="currentColor"
-            d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"
-          ></path>
-        </svg>
-      </a> -->
-      <form [formGroup]="testForm">
-        <label class="px-2 night-mode">
-          Night mode &nbsp; &nbsp;
-          <tui-toggle
-            formControlName="testValue1"
-            size="l"
-            (click)="change()"
-            [showIcons]="true"
-          ></tui-toggle>
-        </label>
-        <!-- <tui-combo-box
-    *tuiLet="service.request(search) | async as filtered"
-    class="b-form"
-    tuiTextfieldExampleText="Type a name"
-    [formControl]="control"
-    [valueContent]="value"
-    [(search)]="search"
->
-    Find the best employees
-    <ng-template #value let-item>
-        <tui-avatar
-            class="avatar"
-            size="xs"
-            [avatarUrl]="item.avatarUrl || null"
-            [text]="item.toString()"
-        ></tui-avatar>
-        <span class="name"> {{item}} </span>
-    </ng-template>
-    <ng-template tuiDataList>
-        <tui-data-list *ngIf="filtered; else loading">
-            <button
-                *ngFor="let item of filtered"
-                tuiOption
-                [value]="item"
-                [disabled]="item.disabled"
+                    <a href="#" class="logo">
+                        <img src="assets/images/logo.png" alt="Softy Pinko"/>
+                    </a>
+
+                    <ul class="nav">
+                        <li><a href="#welcome" class="active">Home</a></li>
+                        <li><a href="#features">About</a></li>
+                        <li><a href="#work-process">Work Process</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                        <li><a href="#pricing-plans">Pricing Tables</a></li>
+                        <li><a href="#blog">Blog Entries</a></li>
+                        <li><a href="#contact-us">Contact Us</a></li>
+                    </ul>
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+
+                </nav> -->
+        <nav class="main-nav">
+
+          <a href="#" class="logo">
+            <img src="assets/images/logo.png" alt="Softy Pinko"/>
+        </a>
+          <ul class="nav">
+            <li><a href="#welcome" class="active">Home</a></li>
+            <li><a href="#features">About</a></li>
+            <li><a href="#work-process">Work Process</a></li>
+           <!--  <li><a href="#testimonials">Testimonials</a></li>
+            <li><a href="#pricing-plans">Pricing Tables</a></li>
+            <li><a href="#blog">Blog Entries</a></li>
+            <li><a href="#contact-us">Contact Us</a></li> -->
+
+          <div class="flex items-center">
+            <form [formGroup]="testForm">
+              <label class="px-2 night-mode">
+                Night mode &nbsp; &nbsp;
+                <tui-toggle
+                  formControlName="testValue1"
+                  size="l"
+                  (click)="change()"
+                  [showIcons]="true"
+                ></tui-toggle>
+              </label>
+            </form>
+
+            <tui-combo-box
+              *tuiLet="service.request(search) | async as filtered"
+              class="w-80 b-form"
+              tuiTextfieldExampleText="Type a Country name"
+              [formControl]="control"
+              [valueContent]="value"
+              (ngModelChange)="language(value)"
+              [(search)]="search"
             >
+              Find your Country
+              <ng-template #value let-item>
                 <tui-avatar
-                    class="avatar"
-                    size="xs"
-                    [avatarUrl]="item.avatarUrl || null"
-                    [text]="item"
+                  class="avatar"
+                  size="xs"
+                  [avatarUrl]="item.avatarUrl || null"
+                  [text]="item.toString()"
                 ></tui-avatar>
-                <span class="name"> {{item}} </span>
-            </button>
-        </tui-data-list>
-        <ng-template #loading>
-            <tui-loader class="tui-space_vertical-4"></tui-loader>
-        </ng-template>
-    </ng-template>
-</tui-combo-box> -->
-      </form>
-      <!--  <tui-combo-box
-    class="b-form"
-    tuiTextfieldExampleText="Type a name"
-    [(ngModel)]="value"
->
-    Find the best employees
-     <tui-data-list-wrapper
-    *tuiDataList
-    [items]="items | tuiFilterByInput"
-></tui-data-list-wrapper>
-<tui-data-list-wrapper
-        *tuiDataList
-        [items]="items | tuiFilterByInputWith : stringify"
-        [itemContent]="stringify | tuiStringifyContent"
-    ></tui-data-list-wrapper>
-</tui-combo-box> -->
-      <!-- <tui-combo-box
-    class="b-form"
-    tuiTextfieldExampleText="Type a name"
-
-    [(ngModel)]="value"
->
-    Find the best employees
-<tui-data-list-wrapper
-        *tuiDataList
-        [items]="items : stringify"
-        [itemContent]="stringify"
-    ></tui-data-list-wrapper>
-</tui-combo-box> -->
-      <!--
-<form class="b-form" [formGroup]="form">
-  <tui-input formControlName="user">
-      User
-      <tui-data-list-wrapper
-          *tuiDataList
-          [items]="itemss | tuiFilterByInput"
-      ></tui-data-list-wrapper>
-  </tui-input>
-</form> -->
-      <!-- <tui-combo-box
-class="b-form"
-tuiTextfieldExampleText="Type a name"
-[(ngModel)]="value"
->
-Find the best employees
-<tui-data-list-wrapper
-    *tuiDataList
-    [items]="items | tuiFilterByInput"
-></tui-data-list-wrapper>
-</tui-combo-box> -->
-      <tui-combo-box
-        *tuiLet="service.request(search) | async as filtered"
-        class="w-80 b-form"
-        tuiTextfieldExampleText="Type a Country name"
-        [formControl]="control"
-        [valueContent]="value"
-        (ngModelChange)="language(value)"
-        [(search)]="search"
-      >
-        Find your Country
-        <ng-template #value let-item>
-          <tui-avatar
-            class="avatar"
-            size="xs"
-            [avatarUrl]="item.avatarUrl || null"
-            [text]="item.toString()"
-          ></tui-avatar>
-          <span class="name"> {{ item }} </span>
-        </ng-template>
-        <ng-template tuiDataList>
-          <tui-data-list *ngIf="filtered; else loading">
+                <span class="name"> {{ item }} </span>
+              </ng-template>
+              <ng-template tuiDataList>
+                <tui-data-list *ngIf="filtered; else loading">
+                  <button
+                    *ngFor="let item of filtered"
+                    tuiOption
+                    [value]="item"
+                    [disabled]="item.disabled"
+                  >
+                    <tui-avatar
+                      class="mx-2 avatar"
+                      size="xs"
+                      [avatarUrl]="item.avatarUrl || null"
+                      [text]="item.toString()"
+                    ></tui-avatar>
+                    <span class="name"> {{ item }} </span>
+                  </button>
+                </tui-data-list>
+                <ng-template #loading>
+                  <tui-loader class="tui-space_vertical-4"></tui-loader>
+                </ng-template>
+              </ng-template>
+            </tui-combo-box>
             <button
-              *ngFor="let item of filtered"
-              tuiOption
-              [value]="item"
-              [disabled]="item.disabled"
+              class="
+                inline-block
+                h-12
+                px-8
+                py-3
+                font-semibold
+                text-gray-600
+                mx-2.5
+                bg-gray-200
+                rounded-lg
+                hover:bg-gray-300
+                focus:ring-4 focus:ring-offset-gray-300 focus:outline-none
+              "
+              (click)="onClickSignOut()"
+              *ngIf="!isLoggedIn$"
             >
-              <tui-avatar
-                class="mx-2 avatar"
-                size="xs"
-                [avatarUrl]="item.avatarUrl || null"
-                [text]="item.toString()"
-              ></tui-avatar>
-              <span class="name"> {{ item }} </span>
+              Sign in
             </button>
-          </tui-data-list>
-          <ng-template #loading>
-            <tui-loader class="tui-space_vertical-4"></tui-loader>
-          </ng-template>
-        </ng-template>
-      </tui-combo-box>
-      <button
-        class="
-          inline-block
-          h-12
-          px-8
-          py-3
-          font-semibold
-          text-gray-600
-          mx-2.5
-          bg-gray-200
-          rounded-lg
-          hover:bg-gray-300
-          focus:ring-4 focus:ring-offset-gray-300 focus:outline-none
-        "
-        (click)="onClickSignOut()"
-        *ngIf="!isLoggedIn$"
-      >
-        Sign in
-      </button>
-      <button
-        *ngIf="!isLoggedIn$"
-        class="
-          inline-block
-          h-12
-          px-6
-          py-3
-          mx-2.5
-          font-semibold
-          text-gray-600
-          bg-gray-200
-          rounded-lg
-          hover:bg-gray-300
-          focus:ring-4 focus:ring-offset-gray-300 focus:outline-none
-        "
-        [routerLink]="['/', paths.auth.root, paths.auth.signUp]"
-      >
-        Sign Up
-      </button>
-      <!-- <button
-        *ngIf="isLoggedIn$"
-        class="
-          inline-block
-          h-12
-          px-6
-          py-3
-          mx-2.5
-          font-semibold
-          text-gray-600
-          bg-gray-200
-          rounded-lg
-          hover:bg-gray-300
-          focus:ring-4 focus:ring-offset-gray-300 focus:outline-none
-        "
-        (click)="onClickSignOut()"
-      >
-        Logout
-      </button> -->
-      <!--       <button
+            <button
+              *ngIf="!isLoggedIn$"
+              class="
+                inline-block
+                h-12
+                px-6
+                py-3
+                mx-2.5
+                font-semibold
+                text-gray-600
+                bg-gray-200
+                rounded-lg
+                hover:bg-gray-300
+                focus:ring-4 focus:ring-offset-gray-300 focus:outline-none
+              "
+              [routerLink]="['/', paths.auth.root, paths.auth.signUp]"
+            >
+              Sign Up
+            </button>
+            <tui-avatar
+              *ngIf="isLoggedIn$"
+              class="px-3 mx-2 tui-space_top-1"
+              style="width: 3rem !important; height: 3rem !important"
+              text="dmitry demensky"
+              size="l"
+              [rounded]="true"
+            ></tui-avatar>
+            <span (tuiActiveZoneChange)="onActiveZone()" *ngIf="isLoggedIn$">
+              <button
+                tuiIconButton
+                type="button"
+                iconRight="tuiIconSettings"
+                [tuiDropdownContent]="dropdownContent"
+                [tuiDropdown]="open"
+                (tuiObscured)="onObscured()"
+                (click)="onClick()"
+                appearance="flat"
+              ></button>
+              <ng-template #dropdownContent>
+                <a
+                  tuiAction
+                  icon="tuiIconStructureLarge"
+                  (click)="onClickDashboard()"
+                >
+                  Apps & Dashboard
+                </a>
+                <a tuiAction icon="tuiIconUser" (click)="OnClickProfile()">
+                  Profile and Account
+                </a>
+                <a
+                  tuiAction
+                  icon="tuiIconLogoutLarge"
+                  (click)="onClickSignOut()"
+                >
+                  Logout
+                </a>
+              </ng-template>
+            </span>
 
-        class="inline-block h-12 px-6 py-3 font-semibold text-gray-600 bg-gray-200 rounded-lg hover:bg-gray-300 focus:ring-4 focus:ring-offset-gray-300 focus:outline-none"
-        (click)="onClickSignOut()"
-      >
-        Sign out
-      </button> -->
-      <!-- <div [tuiDropdownContent]="dropdownContent" [tuiDropdown]="open">
-        Host element
-      </div>
-
-      <ng-template #dropdownContent> Dropdown content </ng-template> -->
-      <tui-avatar   *ngIf="isLoggedIn$"
-        class="px-3 mx-2 tui-space_top-1"
-        style="width: 3rem !important; height: 3rem !important"
-        text="dmitry demensky"
-        size="l"
-        [rounded]="true"
-      ></tui-avatar>
-      <span (tuiActiveZoneChange)="onActiveZone()"   *ngIf="isLoggedIn$">
-        <button
-          tuiIconButton
-          type="button"
-          iconRight="tuiIconSettings"
-          [tuiDropdownContent]="dropdownContent"
-          [tuiDropdown]="open"
-          (tuiObscured)="onObscured()"
-          (click)="onClick()"
-          appearance="flat"
-        ></button>
-        <ng-template #dropdownContent>
-      <!--     <div
-            class="px-10 my-5 text-gray-600 mx-9 dropdown"
-            icon="tuiIconStarLarge"
-          >
-            Profile & Account
           </div>
-          <div
-            class="px-10 my-5 text-gray-600 mx-9 dropdown"
-            icon="tuiIconStarLarge"
-          >
-            Logout
-          </div> -->
-          <a
-            tuiAction
-            icon="tuiIconStructureLarge"
-            (click)="onClickDashboard()"
-
-          >
-            Apps & Dashboard
-          </a>
-          <a
-            tuiAction
-            icon="tuiIconUser"
-            (click)="OnClickProfile()"
-
-          >
-            Profile and Account
-          </a>
-          <a
-            tuiAction
-            icon="tuiIconLogoutLarge"
-
-            (click)="onClickSignOut()"
-          >
-            Logout
-          </a>
-        </ng-template>
-      </span>
+        </ul>
+        <a class='menu-trigger'>
+          <span>Menu</span>
+      </a>
+        </nav>
+      </div>
     </div>
-  </nav>
+  </div>
 </header>
+<!-- ***** Header Area End ***** -->
+
+<!-- <header
+  class="sticky top-0 w-full h-16 shadow-lg bg-opacity-10 bg-gray-50 dark:bg-gray-700 backdrop-blur-lg backdrop-filter"
+></header> -->

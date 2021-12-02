@@ -29,9 +29,21 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": ["src/favicon.ico","src/assets",{"glob":"**/*","input":"node_modules/@taiga-ui/icons/src","output":"assets/taiga-ui/icons"}],
-            "styles": ["src/theme/styles.scss","node_modules/@taiga-ui/core/styles/taiga-ui-global.less","node_modules/@taiga-ui/core/styles/taiga-ui-theme.less"],
-            "scripts": []
+            "assets": [
+              "src/favicon.ico",
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "node_modules/@taiga-ui/icons/src",
+                "output": "assets/taiga-ui/icons"
+              }
+            ],
+            "styles": [
+              "src/theme/styles.scss",
+              "node_modules/@taiga-ui/core/styles/taiga-ui-global.less",
+              "node_modules/@taiga-ui/core/styles/taiga-ui-theme.less"
+            ],
+            "scripts": ["src/assets/js/custom.js"]
           },
           "configurations": {
             "production": {
