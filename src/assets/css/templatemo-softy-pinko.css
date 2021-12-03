@@ -22,16 +22,16 @@ Table of contents
 12. preloader
 
 --------------------------------------------- */
-/* 
+/*
 ---------------------------------------------
 font & reset css
---------------------------------------------- 
+---------------------------------------------
 */
 @import url("https://fonts.googleapis.com/css?family=Raleway:100,300,400,500,700,900");
-/* 
+/*
 ---------------------------------------------
 reset
---------------------------------------------- 
+---------------------------------------------
 */
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, div
 pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q,
@@ -81,7 +81,7 @@ header, nav, section, article, aside, footer, hgroup {
 html, body {
   font-family: "Raleway", sans-serif;
   font-weight: 400;
-  background-color: #fff;
+/*   background- */
   font-size: 16px;
   -ms-text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
@@ -101,25 +101,31 @@ ul {
   margin-bottom: 0px;
 }
 
-/* 
+.darkmode{
+  background: #1F1D36;
+}
+.lightmode{
+
+}
+/*
 ---------------------------------------------
 global styles
---------------------------------------------- 
+---------------------------------------------
 */
 html,
 body {
-  background: #fff;
+/*   background: #fff; */
   font-family: "Raleway", sans-serif;
 }
 
 ::selection {
   background: #ff589e;
-  color: #fff;
+ /*   */
 }
 
 ::-moz-selection {
   background: #ff589e;
-  color: #fff;
+/*    */
 }
 
 .section {
@@ -129,7 +135,7 @@ body {
 }
 
 .section.colored {
-  background: #f2f2fe;
+ /*  background: #f2f2fe; */
 }
 
 .hr {
@@ -141,14 +147,14 @@ body {
 }
 
 .left-heading.light .section-title {
-  color: #ffffff;
+  /* color: #ffffff; */
 }
 
 .left-heading .section-title {
   font-weight: 500;
   font-size: 24px;
   line-height: 42px;
-  color: #1e1e1e;
+
   letter-spacing: 0.25px;
   margin-bottom: 30px;
   position: relative;
@@ -161,46 +167,46 @@ body {
 .center-heading .section-title {
   font-weight: 500;
   font-size: 28px;
-  color: #1e1e1e;
+
   letter-spacing: 1.75px;
   line-height: 38px;
   margin-bottom: 20px;
 }
 
 .center-heading.colored .section-title {
-  color: #ffffff;
+ /*  color: #ffffff; */
 }
 
 .center-text {
   text-align: center;
   font-weight: 400;
   font-size: 16px;
-  color: #777;
+
   line-height: 28px;
   letter-spacing: 1px;
   margin-bottom: 50px;
 }
 
 .center-text.colored {
-  color: #fff;
+ /*   */
 }
 
 .center-text p {
   font-size: 15px;
-  color: #777;
+
   margin-bottom: 30px;
 }
 
 .left-text {
   font-weight: 400;
   font-size: 16px;
-  color: #777;
+
   line-height: 28px;
   letter-spacing: 1px;
 }
 
 .left-text.light {
-  color: #fff;
+ /*   */
 }
 
 .left-text p {
@@ -208,7 +214,7 @@ body {
 }
 
 .left-text p.dark {
-  color: #3B566E;
+ /*  color: #3B566E; */
 }
 
 .padding-bottom-top-60 {
@@ -316,7 +322,7 @@ a.main-button-slider {
   padding: 12px 20px;
   background-color: #ff589e;
   text-transform: uppercase;
-  color: #fff;
+ /*   */
   letter-spacing: 0.25px;
   -webkit-transition: all 0.3s ease 0s;
   -moz-transition: all 0.3s ease 0s;
@@ -334,7 +340,7 @@ a.main-button {
   padding: 12px 20px;
   background-color: #8261ee;
   text-transform: uppercase;
-  color: #fff;
+
   letter-spacing: 0.25px;
   -webkit-transition: all 0.3s ease 0s;
   -moz-transition: all 0.3s ease 0s;
@@ -355,7 +361,7 @@ button.main-button {
   padding: 12px 20px;
   background-color: #8261ee;
   text-transform: uppercase;
-  color: #fff;
+
   letter-spacing: 0.25px;
   -webkit-transition: all 0.3s ease 0s;
   -moz-transition: all 0.3s ease 0s;
@@ -368,10 +374,10 @@ button.main-button:hover {
 }
 
 
-/* 
+/*
 ---------------------------------------------
 header
---------------------------------------------- 
+---------------------------------------------
 */
 .header-area {
   position: fixed;
@@ -390,7 +396,7 @@ header
   box-shadow: 0px 0px 15px rgba(0,0,0,0.1);
   border-radius: 40px;
   min-height: 80px;
-  background: #fff;
+/*   background: #fff; */
 }
 
 .header-area .main-nav .logo {
@@ -436,7 +442,7 @@ header
   display: block;
   font-weight: 500;
   font-size: 13px;
-  color: #fff;
+
   -webkit-transition: all 0.3s ease 0s;
   -moz-transition: all 0.3s ease 0s;
   -o-transition: all 0.3s ease 0s;
@@ -556,7 +562,7 @@ header
 }
 
 .header-area.header-sticky .nav li a {
-  color: #1e1e1e;
+
 }
 
 .header-area.header-sticky .nav li a.active {
@@ -619,7 +625,7 @@ header
     line-height: 50px !important;
     padding: 0px !important;
     border: none !important;
-    background: #fff !important;
+   /*  background: #fff !important; */
     color: #3B566E !important;
   }
   .header-area .main-nav .nav li a:hover {
@@ -633,10 +639,10 @@ header
   }
 }
 
-/* 
+/*
 ---------------------------------------------
 welcome
---------------------------------------------- 
+---------------------------------------------
 */
 .welcome-area {
   overflow: hidden;
@@ -647,7 +653,7 @@ welcome
   background-image: url(../images/banner-bg.png);
   background-repeat: no-repeat;
   background-position: center center;
-  background-size: cover; 
+  background-size: cover;
   height: 100vh;
 }
 
@@ -665,13 +671,13 @@ welcome
   line-height: 54px;
   letter-spacing: 1.4px;
   margin-bottom: 30px;
-  color: #fff;
+ /*   */
 }
 
 .welcome-area .header-text p {
   font-weight: 400;
   font-size: 15px;
-  color: #fff;
+ /*   */
   line-height: 28px;
   letter-spacing: 0.25px;
   margin-bottom: 40px;
@@ -686,15 +692,15 @@ welcome
   }
   .welcome-area .header-text h1 {
     text-align: center;
-    color: #fff;
+  /*    */
     margin-bottom: 15px;
   }
   .welcome-area .header-text h1 span {
-    color: #fff;
+  /*    */
   }
   .welcome-area .header-text p {
     text-align: center;
-    color: #fff;
+   /*   */
     margin-bottom: 20px;
   }
 }
@@ -733,11 +739,11 @@ welcome
     margin-bottom: 30px !important;
   }
   .welcome-area .header-text h1 span {
-    color: #fff;
+    /*  */
   }
   .welcome-area .header-text p {
     text-align: center;
-    color: #fff;
+   /*   */
     font-size: 14px;
     line-height: 22px;
     margin-bottom: 40px;
@@ -745,15 +751,15 @@ welcome
 }
 
 
-/* 
+/*
 ---------------------------------------------
 features
---------------------------------------------- 
+---------------------------------------------
 */
 .features-small-item {
   cursor: pointer;
   display: block;
-  background: #FFFFFF;
+/*   background: #FFFFFF; */
   box-shadow: 0 2px 48px 0 rgba(0, 0, 0, 0.10);
   -webkit-border-radius: 20px;
   -moz-border-radius: 20px;
@@ -791,13 +797,13 @@ features
 
 .features-small-item .icon i {
   font-size: 18px;
-  color: #fff;
+
 }
 
 .features-small-item .features-title {
   font-weight: 500;
   font-size: 18px;
-  color: #1e1e1e;
+
   letter-spacing: 0.7px;
   margin-bottom: 15px;
   position: relative;
@@ -807,7 +813,7 @@ features
 .features-small-item p {
   font-weight: 400;
   font-size: 13px;
-  color: #777;
+
   letter-spacing: 0.5px;
   line-height: 25px;
   position: relative;
@@ -835,10 +841,10 @@ features
   }
 }
 
-/* 
+/*
 ---------------------------------------------
 parallax & home seperator
---------------------------------------------- 
+---------------------------------------------
 */
 .mini {
   min-height: 215px;
@@ -870,7 +876,7 @@ parallax & home seperator
 
 .mini .mini-content .info {
   text-align: center;
-  color: #fff;
+ /*   */
   padding-top: 20px;
   padding-bottom: 20px;
 }
@@ -890,7 +896,7 @@ parallax & home seperator
 }
 
 .mini .mini-content .info h1 {
-  color: #fff;
+ /*   */
   font-weight: 500;
   font-size: 28px;
   letter-spacing: 0.25px;
@@ -900,7 +906,7 @@ parallax & home seperator
 .mini .mini-content .info p {
   letter-spacing: 1px;
   margin-bottom: 40px;
-  color: #fff;
+  /*  */
   letter-spacing: 0.25px;
   line-height: 26px;
   font-weight: 400;
@@ -913,7 +919,7 @@ parallax & home seperator
 
 .mini .mini-content .mini-box {
   display: block;
-  background: #fff;
+/*   background: #fff; */
   padding: 20px;
   border-radius: 20px;
   box-shadow: 0 2px 48px 0 rgba(0, 0, 0, 0.08);
@@ -934,7 +940,7 @@ parallax & home seperator
   content: '';
   position: absolute;
   z-index: -1;
-  background: #fff;
+/*   background: #fff; */
   width: 100%;
   opacity: .15;
   height: 100%;
@@ -955,7 +961,7 @@ parallax & home seperator
   display: block;
   font-weight: 400;
   font-size: 14px;
-  color: #777;
+
   letter-spacing: .75px;
 }
 
@@ -963,7 +969,7 @@ parallax & home seperator
   display: block;
   font-weight: 400;
   font-size: 17px;
-  color: #1e1e1e;
+
   letter-spacing: 0.25px;
   margin-bottom: 5px;
   margin-top: 20px;
@@ -1049,7 +1055,7 @@ parallax & home seperator
   font-size: 36px;
   letter-spacing: 0.25px;
   margin-bottom: 10px;
-  color: #fff;
+/*    */
   margin-top: 120px;
   -webkit-transition: all 0.3s ease 0s;
   -moz-transition: all 0.3s ease 0s;
@@ -1060,7 +1066,7 @@ parallax & home seperator
 .counter .content .count-item span {
   display: block;
   text-align: center;
-  color: #fff;
+/*    */
   font-weight: 500;
   font-size: 17px;
   letter-spacing: 0.25px;
@@ -1105,13 +1111,13 @@ parallax & home seperator
   }
 }
 
-/* 
+/*
 ---------------------------------------------
 team
---------------------------------------------- 
+---------------------------------------------
 */
 .team-item {
-  background: #fff;
+/*   background: #fff; */
   box-shadow: 0 2px 48px 0 rgba(0, 0, 0, 0.10);
   border-radius: 20px;
   position: relative;
@@ -1166,7 +1172,7 @@ team
   display: block;
   font-weight: 400;
   font-size: 17px;
-  color: #1e1e1e;
+
   letter-spacing: 0.25px;
   margin-bottom: 5px;
 }
@@ -1186,18 +1192,18 @@ team
   margin-bottom: 25px;
   font-weight: 400;
   font-size: 15px;
-  color: #777;
+
   letter-spacing: 0.6px;
   line-height: 26px;
 }
 
-/* 
+/*
 ---------------------------------------------
 pricing
---------------------------------------------- 
+---------------------------------------------
 */
 .pricing-item {
-  background: #FFFFFF;
+/*   background: #FFFFFF; */
   box-shadow: 0 2px 48px 0 rgba(0, 0, 0, 0.1);
   border-radius: 20px;
   margin-bottom: 30px;
@@ -1210,7 +1216,7 @@ pricing
 }
 
 .pricing-item.active .pricing-header .pricing-title {
-  color: #1e1e1e;
+
 }
 
 .pricing-item.active .pricing-body .price-wrapper {
@@ -1218,15 +1224,15 @@ pricing
 }
 
 .pricing-item.active .pricing-body .price-wrapper .currency {
-  color: #fff;
+ /*   */
 }
 
 .pricing-item.active .pricing-body .price-wrapper .price {
-  color: #fff;
+  /*  */
 }
 
 .pricing-item.active .pricing-body .price-wrapper .period {
-  color: #fff;
+  /*  */
 }
 
 .pricing-item .pricing-header {
@@ -1240,7 +1246,7 @@ pricing
   font-weight: 500;
   font-size: 17px;
   letter-spacing: 0.25px;
-  color: #1e1e1e;
+
   width: 180px;
   height: 40px;
   line-height: 40px;
@@ -1269,7 +1275,7 @@ pricing
   height: 47px;
   font-weight: 500;
   font-size: 32px;
-  color: #fff;
+ /*   */
   position: relative;
   top: -1px;
 }
@@ -1277,13 +1283,13 @@ pricing
 .pricing-item .pricing-body .price-wrapper .price {
   font-weight: 500;
   font-size: 28px;
-  color: #fff;
+/*    */
 }
 
 .pricing-item .pricing-body .price-wrapper .period {
   font-weight: 400;
   font-size: 14px;
-  color: #fff;
+ /*   */
   display: block;
   letter-spacing: 0.88px;
 }
@@ -1293,13 +1299,13 @@ pricing
   margin-bottom: 12px;
   font-weight: 400;
   font-size: 13px;
-  color: #7a7a7a;
+
   letter-spacing: 0.25px;
   text-decoration: line-through;
 }
 
 .pricing-item .pricing-body .list li.active {
-  color: #7a7a7a;
+
   text-decoration: none;
 }
 
@@ -1308,10 +1314,10 @@ pricing
   margin-top: 50px;
 }
 
-/* 
+/*
 ---------------------------------------------
 blog
---------------------------------------------- 
+---------------------------------------------
 */
 .blog-post-thumb {
   text-align: center;
@@ -1341,7 +1347,7 @@ blog
 .blog-post-thumb h3 a {
   font-weight: 500;
   font-size: 18px;
-  color: #1e1e1e;
+
   letter-spacing: 0.25px;
   line-height: 26px;
   -webkit-transition: all 0.3s ease 0s;
@@ -1357,7 +1363,7 @@ blog
 .blog-post-thumb .text {
   font-weight: 400;
   font-size: 13px;
-  color: #777;
+
   letter-spacing: 0.26px;
   line-height: 26px;
   margin-bottom: 15px;
@@ -1369,7 +1375,7 @@ blog
   line-height: 30px;
   font-weight: 300;
   font-size: 14px;
-  color: #777;
+
   padding-left: 30px;
 }
 
@@ -1383,10 +1389,10 @@ blog
 }
 
 
-/* 
+/*
 ---------------------------------------------
 contact
---------------------------------------------- 
+---------------------------------------------
 */
 
 #contact-us {
@@ -1396,7 +1402,7 @@ contact
 #contact-us h5 {
   font-weight: 500;
   font-size: 18px;
-  color: #1e1e1e;
+
   letter-spacing: 0.25px;
   line-height: 26px;
 }
@@ -1404,7 +1410,7 @@ contact
 .contact-text {
   font-weight: 400;
   font-size: 14px;
-  color: #6F8BA4;
+ /*  color: #6F8BA4; */
   letter-spacing: 0.6px;
   line-height: 26px;
 }
@@ -1415,7 +1421,7 @@ contact
 
 .contact-form input,
 .contact-form textarea {
-  color: #777;
+
   font-size: 14px;
   border: 1px solid #eee;
   width: 100%;
@@ -1436,13 +1442,13 @@ contact
   padding: 20px;
 }
 
-/* 
+/*
 ---------------------------------------------
 footer
---------------------------------------------- 
+---------------------------------------------
 */
 footer {
-  background-image: linear-gradient(127deg, #a759d1 0%, #8261ee 91%);
+ /*  background-image: linear-gradient(127deg, #a759d1 0%, #8261ee 91%); */
   padding-top: 30px;
 }
 
@@ -1460,7 +1466,7 @@ footer .social li {
 footer .social li a {
   color: #9d5bd9;
    text-align: center;
-  background-color: #fff;
+  background-
   width: 36px;
   height: 36px;
   line-height: 36px;
@@ -1475,7 +1481,7 @@ footer .social li a {
 
 footer .social li a:hover {
   background-color: #ff589e;
-  color: #fff;
+ /*   */
 }
 
 footer .copyright {
@@ -1486,7 +1492,7 @@ footer .copyright {
   padding-bottom: 30px;
   font-weight: 400;
   font-size: 12px;
-  color: #fff;
+ /*   */
   letter-spacing: 0.88px;
   text-transform: uppercase;
 }
@@ -1503,10 +1509,10 @@ footer .copyright {
   }
 }
 
-/* 
+/*
 ---------------------------------------------
 preloader
---------------------------------------------- 
+---------------------------------------------
 */
 #preloader {
   overflow: hidden;
@@ -1517,7 +1523,7 @@ preloader
   bottom: 0;
   position: fixed;
   z-index: 9999;
-  color: #fff;
+ /*   */
 }
 
 #preloader .jumper {
@@ -1533,7 +1539,7 @@ preloader
 }
 
 #preloader .jumper > div {
-  background-color: #fff;
+  background-
   width: 10px;
   height: 10px;
   border-radius: 100%;

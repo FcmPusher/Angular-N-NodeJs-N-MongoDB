@@ -4,6 +4,7 @@ import { GlobalService } from '@app/@core/services/global/global.service';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import * as appSettings from '../../../environments/environment';
+
 class Product {
   id?: string;
   code?: string;
@@ -58,6 +59,7 @@ export class DashboardService {
   constructor(
     private http: HttpClient,
     private globalDataService: GlobalService,
+
   ) {
     this.baseUrl = appSettings.environment.apiUrl;
   }

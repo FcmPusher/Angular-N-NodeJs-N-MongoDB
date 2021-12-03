@@ -1,7 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import { Inject, Injectable, OnDestroy } from '@angular/core';
 import { getItem, setItem, StorageItem } from '@app/@core/utils';
-import { fromEventPattern, Subject } from 'rxjs';
+import { fromEventPattern, Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { DEFAULT_BASE_THEME, ThemeList } from './theme.config';
 
@@ -11,12 +11,15 @@ import { DEFAULT_BASE_THEME, ThemeList } from './theme.config';
 export class ThemeService implements OnDestroy {
   destroy$ = new Subject();
 
+  public isDark = new Subject<boolean>();
   private readonly mediaQuery = window.matchMedia(
     '(prefers-color-scheme: dark)',
   );
 
   constructor(@Inject(DOCUMENT) private document: Document) {}
-
+  public isDarks(): Observable<boolean> {
+    return this.isDark.asObservable();
+  }
   get systemTheme(): ThemeList.Light | ThemeList.Dark {
     return this.mediaQuery.matches ? ThemeList.Dark : ThemeList.Light;
   }
@@ -32,6 +35,7 @@ export class ThemeService implements OnDestroy {
   init(): void {
     this.makeAutomaticCheck();
     this.listenForMediaQueryChanges();
+    this.getDarkMode();
   }
 
   /**
@@ -49,8 +53,10 @@ export class ThemeService implements OnDestroy {
       bodyClass = this.systemTheme;
     }
     this.document.body.classList.add(bodyClass);
+    this.getDarkMode();
   }
-  public  getTheme(){
+  public getTheme() {
+    this.getDarkMode();
     return getItem(StorageItem.Theme) as ThemeList;
   }
 
@@ -94,5 +100,13 @@ export class ThemeService implements OnDestroy {
   ngOnDestroy(): void {
     this.destroy$.complete();
     this.destroy$.unsubscribe();
+  }
+  getDarkMode() {
+    let val = getItem(StorageItem.Theme);
+    if (val == 'dark') {
+      this.isDark.next(true);
+    } else {
+      this.isDark.next(false);
+    }
   }
 }

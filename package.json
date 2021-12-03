@@ -28,6 +28,7 @@
     "@angular/platform-browser-dynamic": "13.0.2",
     "@angular/router": "13.0.2",
     "@ngneat/transloco": "^2.23.2",
+    "@ngx-pwa/local-storage": "^13.0.2",
     "@taiga-ui/addon-charts": "^2.16.3",
     "@taiga-ui/addon-commerce": "^2.16.3",
     "@taiga-ui/addon-doc": "2.16.3",
