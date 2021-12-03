@@ -24,7 +24,7 @@
               <div class="row">
                   <!-- ***** Features Small Item Start ***** -->
                   <div class="col-lg-4 col-md-6 col-sm-6 col-12" data-scroll-reveal="enter bottom move 50px over 0.6s after 0.2s">
-                      <div class="features-small-item">
+                      <div class="features-small-item" [ngClass]="{'darkmode': isDark==true, 'lightmode' : isDark==false }">
                           <div class="icon">
                               <i><img src="assets/images/featured-item-01.png" alt=""></i>
                           </div>
@@ -36,7 +36,7 @@
 
                   <!-- ***** Features Small Item Start ***** -->
                   <div class="col-lg-4 col-md-6 col-sm-6 col-12" data-scroll-reveal="enter bottom move 50px over 0.6s after 0.4s">
-                      <div class="features-small-item">
+                      <div class="features-small-item" [ngClass]="{'darkmode': isDark==true, 'lightmode' : isDark==false }">
                           <div class="icon">
                               <i><img src="assets/images/featured-item-01.png" alt=""></i>
                           </div>
@@ -48,7 +48,7 @@
 
                   <!-- ***** Features Small Item Start ***** -->
                   <div class="col-lg-4 col-md-6 col-sm-6 col-12" data-scroll-reveal="enter bottom move 50px over 0.6s after 0.6s">
-                      <div class="features-small-item">
+                      <div class="features-small-item" [ngClass]="{'darkmode': isDark==true, 'lightmode' : isDark==false }">
                           <div class="icon">
                               <i><img src="assets/images/featured-item-01.png" alt=""></i>
                           </div>
@@ -126,42 +126,42 @@
           <!-- ***** Mini Box Start ***** -->
           <div class="row">
               <div class="col-lg-2 col-md-3 col-sm-6 col-6">
-                  <a href="#" class="mini-box">
-                      <i><img src="assets/images/work-process-item-01.png" alt=""></i>
+                  <a href="#" class="mini-box" [ngClass]="{'darkmode': isDark==true, 'lightmode' : isDark==false }">
+                      <i><img src="assets/images/work-process-item-01.png" [ngClass]="{'darkmode': isDark==true, 'lightmode' : isDark==false }" alt=""></i>
                       <strong>Get Ideas</strong>
                       <span>Godard pabst prism fam cliche.</span>
                   </a>
               </div>
               <div class="col-lg-2 col-md-3 col-sm-6 col-6">
-                  <a href="#" class="mini-box">
-                      <i><img src="assets/images/work-process-item-01.png" alt=""></i>
+                  <a href="#" class="mini-box" [ngClass]="{'darkmode': isDark==true, 'lightmode' : isDark==false }">
+                      <i><img src="assets/images/work-process-item-01.png" [ngClass]="{'darkmode': isDark==true, 'lightmode' : isDark==false }" alt=""></i>
                       <strong>Sketch Up</strong>
                       <span>Godard pabst prism fam cliche.</span>
                   </a>
               </div>
               <div class="col-lg-2 col-md-3 col-sm-6 col-6">
-                  <a href="#" class="mini-box">
-                      <i><img src="assets/images/work-process-item-01.png" alt=""></i>
+                  <a href="#" class="mini-box" [ngClass]="{'darkmode': isDark==true, 'lightmode' : isDark==false }">
+                      <i><img src="assets/images/work-process-item-01.png" [ngClass]="{'darkmode': isDark==true, 'lightmode' : isDark==false }" alt=""></i>
                       <strong>Discuss</strong>
                       <span>Godard pabst prism fam cliche.</span>
                   </a>
               </div>
               <div class="col-lg-2 col-md-3 col-sm-6 col-6">
-                  <a href="#" class="mini-box">
-                      <i><img src="assets/images/work-process-item-01.png" alt=""></i>
+                  <a href="#" class="mini-box" [ngClass]="{'darkmode': isDark==true, 'lightmode' : isDark==false }">
+                      <i><img src="assets/images/work-process-item-01.png"  [ngClass]="{'darkmode': isDark==true, 'lightmode' : isDark==false }" alt=""></i>
                       <strong>Revise</strong>
                       <span>Godard pabst prism fam cliche.</span>
                   </a>
               </div>
               <div class="col-lg-2 col-md-3 col-sm-6 col-6">
-                  <a href="#" class="mini-box">
-                      <i><img src="assets/images/work-process-item-01.png" alt=""></i>
+                  <a href="#" class="mini-box" [ngClass]="{'darkmode': isDark==true, 'lightmode' : isDark==false }">
+                      <i><img src="assets/images/work-process-item-01.png" [ngClass]="{'darkmode': isDark==true, 'lightmode' : isDark==false }" alt=""></i>
                       <strong>Approve</strong>
                       <span>Godard pabst prism fam cliche.</span>
                   </a>
               </div>
               <div class="col-lg-2 col-md-3 col-sm-6 col-6">
-                  <a href="#" class="mini-box">
+                  <a href="#" class="mini-box" [ngClass]="{'darkmode': isDark==true, 'lightmode' : isDark==false }">
                       <i><img src="assets/images/work-process-item-01.png" alt=""></i>
                       <strong>Launch</strong>
                       <span>Godard pabst prism fam cliche.</span>
@@ -195,7 +195,7 @@
       <div class="row">
           <!-- ***** Testimonials Item Start ***** -->
           <div class="col-lg-4 col-md-6 col-sm-12">
-              <div class="team-item">
+              <div class="team-item" [ngClass]="{'darkmode': isDark==true, 'lightmode' : isDark==false }">
                   <div class="team-content">
                       <i><img src="assets/images/testimonial-icon.png" alt=""></i>
                       <p>Proin a neque nisi. Nam ipsum nisi, venenatis ut nulla quis, egestas scelerisque orci. Maecenas a finibus odio.</p>
@@ -213,7 +213,7 @@
 
           <!-- ***** Testimonials Item Start ***** -->
           <div class="col-lg-4 col-md-6 col-sm-12">
-              <div class="team-item">
+              <div class="team-item" [ngClass]="{'darkmode': isDark==true, 'lightmode' : isDark==false }">
                   <div class="team-content">
                       <i><img src="assets/images/testimonial-icon.png" alt=""></i>
                       <p>Integer molestie aliquam gravida. Nullam nec arcu finibus, imperdiet nulla vitae, placerat nibh. Cras maximus venenatis molestie.</p>
@@ -231,7 +231,7 @@
 
           <!-- ***** Testimonials Item Start ***** -->
           <div class="col-lg-4 col-md-6 col-sm-12">
-              <div class="team-item">
+              <div class="team-item" [ngClass]="{'darkmode': isDark==true, 'lightmode' : isDark==false }">
                   <div class="team-content">
                       <i><img src="assets/images/testimonial-icon.png" alt=""></i>
                       <p>Quisque diam odio, maximus ac consectetur eu, auctor non lorem. Cras quis est non ante ultrices molestie. Ut vehicula et diam at aliquam.</p>
@@ -301,7 +301,7 @@
 
           <!-- ***** Pricing Item Start ***** -->
           <div class="col-lg-4 col-md-6 col-sm-12" data-scroll-reveal="enter bottom move 50px over 0.6s after 0.4s">
-              <div class="pricing-item active">
+              <div class="pricing-item active" [ngClass]="{'darkmode': isDark==true, 'lightmode' : isDark==false }">
                   <div class="pricing-header">
                       <h3 class="pricing-title">Premium</h3>
                   </div>
@@ -329,7 +329,7 @@
 
           <!-- ***** Pricing Item Start ***** -->
           <div class="col-lg-4 col-md-6 col-sm-12" data-scroll-reveal="enter bottom move 50px over 0.6s after 0.6s">
-              <div class="pricing-item">
+              <div class="pricing-item" [ngClass]="{'darkmode': isDark==true, 'lightmode' : isDark==false }">
                   <div class="pricing-header">
                       <h3 class="pricing-title">Advanced</h3>
                   </div>
