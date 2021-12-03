@@ -31,7 +31,7 @@
           <a href="#" class="logo">
             <img src="assets/images/logo.png" alt="Softy Pinko"/>
         </a>
-          <ul class="nav">
+          <ul class="nav" id="navBar">
             <li><a href="#welcome" class="active">Home</a></li>
             <li><a href="#features">About</a></li>
             <li><a href="#work-process">Work Process</a></li>
@@ -174,7 +174,7 @@
 
           </div>
         </ul>
-        <a class='menu-trigger'>
+        <a class='menu-trigger' (click)="toggle()">
           <span>Menu</span>
       </a>
         </nav>

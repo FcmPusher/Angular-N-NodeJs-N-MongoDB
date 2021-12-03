@@ -18,6 +18,7 @@ export class ThemeService implements OnDestroy {
 
   constructor(@Inject(DOCUMENT) private document: Document) {}
   public isDarks(): Observable<boolean> {
+    this.getDarkMode();
     return this.isDark.asObservable();
   }
   get systemTheme(): ThemeList.Light | ThemeList.Dark {
@@ -25,6 +26,7 @@ export class ThemeService implements OnDestroy {
   }
 
   get storedTheme(): ThemeList {
+
     return getItem(StorageItem.Theme) as ThemeList;
   }
 

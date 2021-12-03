@@ -22,6 +22,7 @@ import {
   switchMap,
   takeUntil
 } from 'rxjs/operators';
+
 class Country {
   constructor(
     readonly name: string,
@@ -103,18 +104,18 @@ export class Service {
 export class HeaderComponent implements OnInit {
   isLoggedIn$: boolean;
   open = false;
-
-  onClick() :void{
+  isToggle = false;
+  onClick(): void {
     this.open = !this.open;
   }
 
-  onObscured() :void{
+  onObscured(): void {
     if (true) {
       this.open = false;
     }
   }
 
-  onActiveZone() :void{
+  onActiveZone(): void {
     this.open = this.open;
   }
   // readonly items = [
@@ -208,16 +209,28 @@ readonly stringify = (item: {name: string; surname: string}) =>
       val == false ? this.theme.Dark : this.theme.Light,
     );
   }
-  onClickDashboard():void {
+  onClickDashboard(): void {
     //this.open = !this.open;
     this.open = false;
-    const { dashboard} = ROUTER_UTILS.config.base;
+    const { dashboard } = ROUTER_UTILS.config.base;
     this.router.navigate(['/', dashboard]);
   }
-  OnClickProfile():void{
+  OnClickProfile(): void {
     //this.open = !this.open;
     this.open = false;
-    const { root} = ROUTER_UTILS.config.user;
+    const { root } = ROUTER_UTILS.config.user;
     this.router.navigate(['/', root]);
+  }
+  toggle(): void {
+    console.log("toggle");
+
+    this.isToggle = this.isToggle == true ? false : true;
+    console.log(this.isToggle);
+    if(this.isToggle ){
+      const element = document.getElementById('navBar').style.display = "none";
+    }else{
+      const element = document.getElementById('navBar').style.display = "block";
+    }
+
   }
 }
