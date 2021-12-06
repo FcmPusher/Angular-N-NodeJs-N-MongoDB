@@ -159,7 +159,7 @@ readonly stringify = (item: {name: string; surname: string}) =>
   theme = ThemeList;
 
   search: any = '';
-
+  isDark: any;
   readonly control = new FormControl();
   readonly itemss = [
     'John Cleese',
@@ -179,7 +179,17 @@ readonly stringify = (item: {name: string; surname: string}) =>
     private serviceLoCo: TranslocoService,
     private themeService: ThemeService,
     @Inject(Service) readonly service: Service,
-  ) {}
+  ) {
+
+    this.themeService.isDarks().subscribe({
+      next: (user) => {
+        this.isDark = user;
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
+  }
 
   ngOnInit() {
     this.isLoggedIn$ = !!getItem(StorageItem.Auth);

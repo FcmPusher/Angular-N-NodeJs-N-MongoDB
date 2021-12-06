@@ -3,7 +3,8 @@
   "version": "0.0.2",
   "private": true,
   "scripts": {
-    "ng": "ng",
+    "ng": "ng --max_old_space_size=7000 ./node_modules/@angular/cli/bin/ng",
+    "ng-high-memory": "node --max_old_space_size=4096 node_modules/@angular/cli/bin/ng build --prod --aot",
     "postinstall": "npx husky install",
     "start": "ng serve",
     "build": "ng build",

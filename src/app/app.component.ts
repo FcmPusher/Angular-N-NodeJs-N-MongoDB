@@ -11,12 +11,21 @@ import { Observable } from 'rxjs';
 })
 export class AppComponent implements OnInit {
   isLoggedIn$!: Observable<boolean>;
-
+  isDark: any;
   constructor(
     private seoService: SeoService,
     private themeService: ThemeService,
     private authService: AuthService,
-  ) {}
+  ) {
+    this.themeService.isDarks().subscribe({
+      next: (user) => {
+        this.isDark = user;
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
+  }
 
   ngOnInit(): void {
     this.isLoggedIn$ = this.authService.isLoggedIn$;

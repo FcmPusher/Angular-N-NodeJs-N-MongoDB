@@ -5,10 +5,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { WebShellModule } from '@shell/ft/web-shell.module';
 import {
-  TuiDialogModule,
-  TuiNotificationsModule,
-  TuiRootModule,
-  TUI_SANITIZER
+  TuiDialogModule, TuiModeModule, TuiNotificationsModule,
+  TuiRootModule, TuiThemeNightModule, TUI_SANITIZER
 } from '@taiga-ui/core';
 import { NgDompurifySanitizer } from '@tinkoff/ng-dompurify';
 import { NgxSpinnerModule } from 'ngx-spinner';
@@ -30,6 +28,8 @@ import { TranslocoRootModule } from './transloco-root.module';
     TuiNotificationsModule,
     // NgxLoadingModule.forRoot({})
     NgxSpinnerModule,
+    TuiThemeNightModule,
+    TuiModeModule,
   ],
   bootstrap: [AppComponent],
   providers: [{ provide: TUI_SANITIZER, useClass: NgDompurifySanitizer }],

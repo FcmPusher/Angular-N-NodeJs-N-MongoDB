@@ -102,10 +102,10 @@ ul {
 }
 
 .darkmode{
-  background: #1F1D36;
+  background: #1F1D36 !important;
 }
 .lightmode{
-
+  background: #fff !important;
 }
 /*
 ---------------------------------------------
@@ -427,11 +427,12 @@ header
   transition: all 0.3s ease 0s;
   position: relative;
   z-index: 999;
+  top: -7px;
 }
 
 .header-area .main-nav .nav li {
-  padding-left: 20px;
-  padding-right: 20px;
+/*   padding-left: 20px;
+  padding-right: 20px; */
 }
 
 .header-area .main-nav .nav li:last-child {
@@ -609,6 +610,7 @@ header
     -o-transition: all 0s ease 0s;
     transition: all 0s ease 0s;
     margin-left: 0px;
+
   }
   .header-area .main-nav .nav li:first-child {
     border-top: 1px solid #eee;
