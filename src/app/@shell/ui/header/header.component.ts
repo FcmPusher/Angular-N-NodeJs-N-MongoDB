@@ -180,7 +180,6 @@ readonly stringify = (item: {name: string; surname: string}) =>
     private themeService: ThemeService,
     @Inject(Service) readonly service: Service,
   ) {
-
     this.themeService.isDarks().subscribe({
       next: (user) => {
         this.isDark = user;
@@ -218,6 +217,14 @@ readonly stringify = (item: {name: string; surname: string}) =>
     this.themeService.setTheme(
       val == false ? this.theme.Dark : this.theme.Light,
     );
+    if (val==true) {
+      console.log('true');
+      this.themeService.switchTheme('saga-blue');
+    } else {
+      console.log('false');
+      this.themeService.switchTheme('arya-blue');
+    }
+
   }
   onClickDashboard(): void {
     //this.open = !this.open;
@@ -232,15 +239,16 @@ readonly stringify = (item: {name: string; surname: string}) =>
     this.router.navigate(['/', root]);
   }
   toggle(): void {
-    console.log("toggle");
+    console.log('toggle');
 
     this.isToggle = this.isToggle == true ? false : true;
     console.log(this.isToggle);
-    if(this.isToggle ){
-      const element = document.getElementById('navBar').style.display = "none";
-    }else{
-      const element = document.getElementById('navBar').style.display = "block";
+    if (this.isToggle) {
+      const element = (document.getElementById('navBar').style.display =
+        'none');
+    } else {
+      const element = (document.getElementById('navBar').style.display =
+        'block');
     }
-
   }
 }

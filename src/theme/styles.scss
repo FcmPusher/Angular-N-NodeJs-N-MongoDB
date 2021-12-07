@@ -2,9 +2,8 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 @import '~primeicons/primeicons.css';
-@import '~primeng/resources/themes/saga-blue/theme.css';
 @import '~primeng/resources/primeng.min.css';
-html, body { height: 100%; }
+html, body { height: 100%; margin-top: 150px !important; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 @layer base {
   @import '01-base/font.scss';

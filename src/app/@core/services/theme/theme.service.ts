@@ -26,7 +26,6 @@ export class ThemeService implements OnDestroy {
   }
 
   get storedTheme(): ThemeList {
-
     return getItem(StorageItem.Theme) as ThemeList;
   }
 
@@ -98,7 +97,14 @@ export class ThemeService implements OnDestroy {
       this.document.body.classList.remove(key);
     }
   }
-
+  switchTheme(theme: string) {
+    let themeLink = this.document.getElementById(
+      'app-theme',
+    ) as HTMLLinkElement;
+    if (themeLink) {
+      themeLink.href = theme + '.css';
+    }
+  }
   ngOnDestroy(): void {
     this.destroy$.complete();
     this.destroy$.unsubscribe();
