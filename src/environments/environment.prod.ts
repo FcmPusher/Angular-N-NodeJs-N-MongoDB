@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
   appVersion: require('../../package.json').version,
-  apiUrl: 'https://fcmpusher.herokuapp.com/v1/',
+  apiUrl: 'https://fcmpusherapi.kumawat.co.in/v1/',
 };
