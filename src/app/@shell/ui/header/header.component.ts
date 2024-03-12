@@ -8,12 +8,12 @@ import {
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ThemeList, ThemeService } from '@app/@core/services/theme';
-import { getItem, StorageItem } from '@app/@core/utils';
+import { StorageItem, getItem } from '@app/@core/utils';
 import { ROUTER_UTILS } from '@app/@core/utils/router.utils';
 import { AuthService } from '@app/pages/auth/services/auth.service';
 import { TranslocoService } from '@ngneat/transloco';
-import { TuiDestroyService, TUI_DEFAULT_MATCHER } from '@taiga-ui/cdk';
-import { Observable, of, Subject } from 'rxjs';
+import { TUI_DEFAULT_MATCHER, TuiDestroyService } from '@taiga-ui/cdk';
+import { BehaviorSubject, Observable, Subject, Subscription, interval, of } from 'rxjs';
 import {
   delay,
   distinctUntilChanged,
@@ -32,7 +32,7 @@ class Country {
     readonly lang: string,
     readonly avatarUrl: string | null = null,
     readonly disabled: boolean = false,
-  ) {}
+  ) { }
 
   toString(): string {
     return `${this.nativeName} (${this.name}) - ${this.lang}`;
@@ -86,7 +86,7 @@ export class Service {
 
   constructor(
     @Inject(TuiDestroyService) private readonly destroy$: Observable<void>,
-  ) {}
+  ) { }
 
   request(query: string | null): Observable<ReadonlyArray<Country> | null> {
     this.request$.next(query || '');
@@ -102,7 +102,7 @@ export class Service {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent implements OnInit {
-  isLoggedIn$: boolean;
+  public isLoggedIn$ = new BehaviorSubject<boolean>(false);
   open = false;
   isToggle = false;
   onClick(): void {
@@ -157,6 +157,7 @@ readonly stringify = (item: {name: string; surname: string}) =>
   path = ROUTER_UTILS.config.base;
   paths = ROUTER_UTILS.config;
   theme = ThemeList;
+  mySub: Subscription;
 
   search: any = '';
   isDark: any;
@@ -191,9 +192,12 @@ readonly stringify = (item: {name: string; surname: string}) =>
   }
 
   ngOnInit() {
-    this.isLoggedIn$ = !!getItem(StorageItem.Auth);
+    let islogin = !!getItem(StorageItem.Auth);
+    this.isLoggedIn$.next(islogin);
+    this.mySub = interval(500).subscribe((func => {
+      this.isLoggedIn$.next(!!getItem(StorageItem.Auth));
+    }))
     const currentTheme = this.themeService.getTheme();
-    console.log(currentTheme);
     this.testForm.controls['testValue1'].setValue(
       currentTheme == 'light' ? false : true,
     );
@@ -206,22 +210,17 @@ readonly stringify = (item: {name: string; surname: string}) =>
     this.router.navigate(['/', root, signIn]);
   }
   language(event: any) {
-    console.log(event);
-    console.log(this.control.value);
     this.serviceLoCo.setActiveLang(this.control.value.langCode);
   }
   change() {
-    console.log(this.testForm.controls['testValue1'].value);
     const val = this.testForm.controls['testValue1'].value;
 
     this.themeService.setTheme(
       val == false ? this.theme.Dark : this.theme.Light,
     );
-    if (val==true) {
-      console.log('true');
+    if (val == true) {
       this.themeService.switchTheme('saga-blue');
     } else {
-      console.log('false');
       this.themeService.switchTheme('arya-blue');
     }
 
@@ -239,10 +238,7 @@ readonly stringify = (item: {name: string; surname: string}) =>
     this.router.navigate(['/', root]);
   }
   toggle(): void {
-    console.log('toggle');
-
     this.isToggle = this.isToggle == true ? false : true;
-    console.log(this.isToggle);
     if (this.isToggle) {
       const element = (document.getElementById('navBar').style.display =
         'none');

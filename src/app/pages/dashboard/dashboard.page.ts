@@ -1,10 +1,10 @@
 import { Location } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { GeneralService } from '@app/@core/services/general/general.service';
 import { NotificationService } from '@app/@core/services/notification/notification.service';
 import { RouterService } from '@app/@core/services/router/router.service';
-import { getItem, StorageItem } from '@app/@core/utils';
+import { StorageItem, getItem } from '@app/@core/utils';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { DashboardService } from './dashboard.service';
 class Users {
@@ -15,6 +15,7 @@ class Users {
   password?: number;
   email?: number;
   role?: any;
+  id?:any
 }
 class Organization {
   orgName?: string;
@@ -39,7 +40,6 @@ class Product {
 @Component({
   templateUrl: './dashboard.page.html',
   styleUrls: ['./dashboard.page.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardPage implements OnInit {
   productDialog: boolean;
@@ -48,7 +48,7 @@ export class DashboardPage implements OnInit {
   selectedProducts: Product[];
   submitted: boolean;
   users: Users[];
-  organization: Organization[];
+  organization: Organization[]=[];
   selectedUsers: Users[];
   selectedOrganization: Organization[];
   public newOrg: Organization;
@@ -69,10 +69,14 @@ export class DashboardPage implements OnInit {
 
   ngOnInit(): void {
     console.log('kamlesh');
+    this.organization=[];
     this.generalService.show();
     this.isLoggedIn$ = !!getItem(StorageItem.Auth);
     console.log(this.isLoggedIn$);
     this.productService.getProducts().then((data) => (this.products = data));
+    
+    let auth:any=getItem(StorageItem.Auth)
+    this.user= auth?.user;
     this.getUserList();
     //this.generalService.hide();
   }
@@ -145,7 +149,7 @@ export class DashboardPage implements OnInit {
   }
   onClick(event: any): void {
     console.log(event);
-    this.routerService.navigate('dashboard/product/' + event.user);
+    this.routerService.navigate('dashboard/product/' + event.id);
     //this.router.navigate(['dashboard/product/' + event.user]);
   }
   editProduct(product: Product) {
@@ -181,10 +185,16 @@ export class DashboardPage implements OnInit {
   saveUser() {
     //debugger
     console.log(this.user);
-    if (this.newOrg.orgName == (null || undefined || '')) {
+    console.log(this.newOrg )
+    if (this.newOrg.orgName != (null || undefined || '')) {
       const request = {
         orgName: this.newOrg.orgName,
+        user:this.user.id
+        
       };
+      console.log("Request");
+      console.log(request)
+
       this.productService.getSave(request).subscribe(
         (res) => {
           console.log(res);
@@ -272,6 +282,7 @@ export class DashboardPage implements OnInit {
           detail: 'Product Updated',
           life: 3000,
         });
+        this.getUserList();
       } else {
         this.product.id = this.createId();
         this.product.image = 'product-placeholder.svg';
@@ -301,21 +312,35 @@ export class DashboardPage implements OnInit {
     return index;
   }
   getUserList(): void {
-    this.productService.getUserList().subscribe(
-      (res) => {
-        console.log(res);
-        //debugger;
-        this.organization = res.results;
-        console.log(this.organization);
-        this.generalService.hide();
-      },
-      (error) => {
-        // this.loading = false;
-        this._notificationService.error(error.message);
-        console.log(error);
-        this.generalService.restError(error);
-      },
-    );
+    
+    this.productService.getUserList(this.user.id).then((cars:Organization[])  => {
+      console.log(cars)
+      cars.forEach(element => {
+        this.organization.push(element);
+      });
+
+      console.log(this.organization)
+      this.organization = cars;
+      this.generalService.hide();
+    });
+
+
+
+    // this.productService.getUserList(this.user.id).then(
+    //   (res:any) => {
+    //     console.log(res);
+    //     //debugger;
+    //     this.organization = res?.results;
+    //     console.log(this.organization);
+    //     this.generalService.hide();
+    //   },
+    //   (error) => {
+    //     // this.loading = false;
+    //     this._notificationService.error(error.message);
+    //     console.log(error);
+    //     this.generalService.restError(error);
+    //   },
+    // );
   }
   back() {
     this._location.back();

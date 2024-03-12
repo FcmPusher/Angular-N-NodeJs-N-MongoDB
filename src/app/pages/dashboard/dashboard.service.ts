@@ -4,7 +4,13 @@ import { GlobalService } from '@app/@core/services/global/global.service';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import * as appSettings from '../../../environments/environment';
-
+class Organization {
+  orgName?: string;
+  isActive?: boolean;
+  user?: string;
+  isDeleted?: boolean;
+  id?: string;
+}
 class Product {
   id?: string;
   code?: string;
@@ -112,7 +118,7 @@ export class DashboardService {
 
   generateId() {
     let text = '';
-    const possible ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
     for (let i = 0; i < 5; i++) {
       text += possible.charAt(Math.floor(Math.random() * possible.length));
@@ -140,34 +146,50 @@ export class DashboardService {
   generateRating() {
     return Math.floor(Math.random() * Math.floor(5) + 1);
   }
-  getUserList(): Observable<any> {
-    return this.http.get(this.baseUrl+"organization/?user=613e06986dfdcf25f8c61576&sortBy=asc&limit=1&page=1", this.requestOptions());
+  getUserList(userId: any) {
+   return this.http.get<any>(this.baseUrl + "organization/?user="+userId+"&sortBy=asc&limit=10&page=1", this.requestOptions()).toPromise().then(res => <Organization[]>res.results)
+    .then(data => { return data; });;
   }
 
-  getProductList(id:any) : Observable<any>{
-    return this.http.get(this.baseUrl+"product/?user="+id+"&sortBy=asc&limit=1&page=1", this.requestOptions());
+  getProductList(id: any): Observable<any> {
+    return this.http.get(this.baseUrl + "product/?orgId=" + id + "&sortBy=asc&limit=10&page=1", this.requestOptions());
   }
-  getFragmentList(id:any) : Observable<any>{
-    return this.http.get(this.baseUrl+"fragment/?product="+id+"&sortBy=asc&limit=1&page=1", this.requestOptions());
+  getFragmentList(id: any): Observable<any> {
+    return this.http.get(this.baseUrl + "fragment/?product=" + id + "&sortBy=asc&limit=10&page=1", this.requestOptions());
   }
 
   getSave(user: any): Observable<any> {
-    /*     return this.http.post(this.baseUrl + 'users', user, this.requestOptions()).map((response: Response) => {
+    return this.http.post(this.baseUrl + 'organization/create', user, this.requestOptions()).pipe((response: any) => {
       return response;
-    }); */
- /*    return this.http.get('http://jsonplaceholder.typicode.com/posts')
-      .pipe(map((res) => res.json())); */
-/*     return this.http.get('http://jsonplaceholder.typicode.com/posts')
-      .pipe(map(res => res.json())); */
-      return this.http
+    });
+
+    
+    /*    return this.http.get('http://jsonplaceholder.typicode.com/posts')
+         .pipe(map((res) => res.json())); */
+    /*     return this.http.get('http://jsonplaceholder.typicode.com/posts')
+          .pipe(map(res => res.json())); */
+    /*   return this.http
         .get<any>('http://jsonplaceholder.typicode.com/posts')
         .pipe(retry(1), catchError(this.handleError));
-
+ */
   }
-   // Error handling
-   handleError(error) {
+
+  saveProduct(user: any): Observable<any> {
+    return this.http.post(this.baseUrl + 'product/create', user, this.requestOptions()).pipe((response: any) => {
+      return response;
+    });
+  }
+
+  saveFragment(user: any): Observable<any> {
+    return this.http.post(this.baseUrl + 'fragment/create', user, this.requestOptions()).pipe((response: any) => {
+      return response;
+    });
+  }
+
+  // Error handling
+  handleError(error) {
     let errorMessage = '';
-    if(error.error instanceof ErrorEvent) {
+    if (error.error instanceof ErrorEvent) {
       // Get client-side error
       errorMessage = error.error.message;
     } else {
@@ -176,17 +198,17 @@ export class DashboardService {
     }
     window.alert(errorMessage);
     return throwError(errorMessage);
- }
+  }
   updateUser(user: any): Observable<any> {
-    /* return this.http
+    return this.http
       .put(this.baseUrl + 'users', user, this.requestOptions())
-      .map((response: Response) => {
+      .pipe((response: any) => {
         return response;
-      }); */
+      });
 
-      return this.http
-      .get<any>('http://jsonplaceholder.typicode.com/posts')
-      .pipe(retry(1), catchError(this.handleError));
+    // return this.http
+    // .get<any>('http://jsonplaceholder.typicode.com/posts')
+    // .pipe(retry(1), catchError(this.handleError));
   }
 
   deleteUser(id: any): Observable<any> {
@@ -196,11 +218,11 @@ export class DashboardService {
     );
   }
   private requestOptions() {
-   /*  const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization:
-        'Bearer ' + JSON.parse(this.globalDataService.getToken()).access_token,
-    }); */
+    /*  const headers = new HttpHeaders({
+       'Content-Type': 'application/json',
+       Authorization:
+         'Bearer ' + JSON.parse(this.globalDataService.getToken()).access_token,
+     }); */
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization:
@@ -209,26 +231,26 @@ export class DashboardService {
     const httpOptions = { headers: headers };
     return httpOptions;
   }
-/*   private requestAuth() {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/x-www-form-urlencoded',
-      Authorization: 'Basic ' + btoa('sudarshan' + ':' + 'password'),
-    });
-    const httpOptions = { headers: headers };
-    return httpOptions;
-  }
- */
+  /*   private requestAuth() {
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/x-www-form-urlencoded',
+        Authorization: 'Basic ' + btoa('sudarshan' + ':' + 'password'),
+      });
+      const httpOptions = { headers: headers };
+      return httpOptions;
+    }
+   */
   login(user: any): Observable<any> {
     const body = new URLSearchParams();
     body.set('username', user.username);
     body.set('password', user.password);
     body.set('grant_type', 'password');
- /*    return this.http
-      .post(this.baseUrl + 'oauth/token', body.toString(), this.requestAuth())
-      .map((response: Response) => {
-        return response;
-      }); */
-      return this.http.get<any>('http://jsonplaceholder.typicode.com/posts')
+    /*    return this.http
+         .post(this.baseUrl + 'oauth/token', body.toString(), this.requestAuth())
+         .map((response: Response) => {
+           return response;
+         }); */
+    return this.http.get<any>('http://jsonplaceholder.typicode.com/posts')
       .pipe(
         retry(1),
         catchError(this.handleError)

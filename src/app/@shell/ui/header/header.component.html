@@ -110,12 +110,12 @@
                 focus:ring-4 focus:ring-offset-gray-300 focus:outline-none
               "
               (click)="onClickSignOut()"
-              *ngIf="!isLoggedIn$"
+              *ngIf="!(isLoggedIn$ | async)"
             >
               Sign in
             </button>
             <button
-              *ngIf="!isLoggedIn$"
+              *ngIf="!(isLoggedIn$ | async)"
               class="
                 inline-block
                 h-12
@@ -134,14 +134,14 @@
               Sign Up
             </button>
             <tui-avatar
-              *ngIf="isLoggedIn$"
+              *ngIf="isLoggedIn$ | async"
               class="px-3 mx-2 tui-space_top-1"
               style="width: 3rem !important; height: 3rem !important"
               text="dmitry demensky"
               size="l"
               [rounded]="true"
             ></tui-avatar>
-            <span (tuiActiveZoneChange)="onActiveZone()" *ngIf="isLoggedIn$">
+            <span (tuiActiveZoneChange)="onActiveZone()" *ngIf="isLoggedIn$ |async">
               <button
                 tuiIconButton
                 type="button"

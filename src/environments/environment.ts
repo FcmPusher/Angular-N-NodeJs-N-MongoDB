@@ -7,6 +7,7 @@ export const environment = {
   //apiUrl: 'http://localhost:3000/v1/',
   appVersion: require('../../package.json').version + '-dev',
   apiUrl: 'https://fcmpusherapi.kumawat.co.in/v1/',
+ // apiUrl: 'http://localhost:3000/v1/',
 };
 
 /*

@@ -3,11 +3,13 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GeneralService } from '@app/@core/services/general/general.service';
 import { NotificationService } from '@app/@core/services/notification/notification.service';
+import { StorageItem, getItem } from '@app/@core/utils';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { DashboardService } from '../dashboard.service';
+
 class Fragment {
   id?: string;
-  message?: string;
+  notification?: string;
   title?: string;
   data?: string;
   user?: string;
@@ -18,6 +20,7 @@ class Fragment {
 }
 class Users {
   userId?: string;
+  id?: string;
   firstName?: string;
   lastName?: string;
   username?: string;
@@ -31,7 +34,8 @@ class Users {
   styleUrls: ['./fragment.component.scss']
 })
 export class FragmentComponent implements OnInit {
-  id: string;
+  productId: string;
+  orgId: string;
   loading = false;
   productDialog: boolean;
   fragments: Fragment[];
@@ -40,6 +44,7 @@ export class FragmentComponent implements OnInit {
   users: Users[];
   selectedUsers: Users[];
   user: Users;
+  fragmentCreate:Fragment= new Fragment();
   userSubmitted: boolean;
   userDialog: boolean;
   isLoggedIn$: any;
@@ -56,9 +61,15 @@ export class FragmentComponent implements OnInit {
 
   ngOnInit(): void {
     this.generalService.show();
-    this.id = this.route.snapshot.paramMap.get('id');
-    console.log(this.id);
-    this.getFragmentList(this.id);
+
+    console.log(this.route.snapshot.url[1].path)
+    this.orgId=this.route.snapshot.url[1].path;
+    this.productId = this.route.snapshot.paramMap.get('id');
+    console.log(this.productId);
+    this.getFragmentList(this.productId);
+    let auth:any=getItem(StorageItem.Auth)
+    this.user= auth?.user;
+    console.log(this.user)
   }
 
   getFragmentList(id): void {
@@ -66,7 +77,6 @@ export class FragmentComponent implements OnInit {
     this.productService.getFragmentList(id).subscribe(
       (res) => {
         console.log(res);
-        debugger;
 
         this.fragments = res.results;
         console.log(this.fragments);
@@ -114,9 +124,8 @@ export class FragmentComponent implements OnInit {
       },
     });
   }
-  editUser(user: Users) {
-    debugger;
-    this.user = { ...user };
+  editUser(user: Fragment) {
+    this.fragmentCreate = { ...user };
     this.userDialog = true;
   }
 
@@ -127,7 +136,6 @@ export class FragmentComponent implements OnInit {
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.users = this.users.filter((val) => val.userId !== user.userId);
-        this.user = {};
         this.productService.deleteUser(user.userId).subscribe(
           (res) => {
             this.messageService.add({
@@ -178,27 +186,27 @@ export class FragmentComponent implements OnInit {
     this.userSubmitted = false;
   }
   saveUser() {
-    debugger
-    console.log(this.user);
-    if (this.user.userId == null || this.user.userId == undefined ||  this.user.userId == '') {
+    let auth:any=getItem(StorageItem.Auth)
+    this.user= auth?.user;
+    if (this.fragmentCreate!= null || this.fragmentCreate.notification != undefined) {
       const request = {
 
-        "firstName": this.user.firstName,
-        "lastName": this.user.lastName,
-        "username": this.user.username,
-        "password": this.user.password,
-        "email": this.user.email,
-        "role": [
-          this.user.role
-        ]
+        "notification":JSON.stringify(JSON.parse(this.fragmentCreate.notification)),
+        "title": this.fragmentCreate.title,
+        "data":JSON.stringify(JSON.parse(this.fragmentCreate.data)),
+        "user": this.user.id,
+        "organization": this.orgId,
+        "product": this.productId,
+        "id":this.fragmentCreate.id
       }
-      this.productService.getSave(request).subscribe(
+      this.productService.saveFragment(request).subscribe(
         (res) => {
           console.log(res);
         //  this.getUserList();
           this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'User save', life: 3000 });
           this.userDialog = false;
           this.userSubmitted = false;
+          this.getFragmentList(this.productId);
 
         }, (error) => {
           // this.loading = false;
@@ -287,7 +295,7 @@ export class FragmentComponent implements OnInit {
   }
   onClick(event:any) : void{
     console.log(event);
-    const url='dashboard/product/'+this.id+'/fragment/'+event.user;
+    const url='dashboard/product/'+this.productId+'/fragment/'+event.user;
     this.router.navigate([url]);
   }
 

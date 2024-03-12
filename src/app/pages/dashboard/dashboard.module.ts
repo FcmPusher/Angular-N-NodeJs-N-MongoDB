@@ -37,6 +37,7 @@ import { DashboardService } from './dashboard.service';
 import { FragmentComponent } from './fragment/fragment.component';
 import { ProductComponent } from './product/product.component';
 
+
 @NgModule({
   declarations: [DashboardPage, ProductComponent, FragmentComponent],
   imports: [

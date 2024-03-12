@@ -68,6 +68,6 @@ export class GlobalService {
     return localStorage.getItem(GlobalVariables.COOKIE_TOKEN);
   }
   setAuthData(auth: any) {
-    localStorage.setItem(GlobalVariables.AUTH_LS, auth);
+    localStorage.setItem(GlobalVariables.AUTH_LS,JSON.stringify(auth));
   }
 }

@@ -1,8 +1,9 @@
 import { Location } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GeneralService } from '@app/@core/services/general/general.service';
 import { NotificationService } from '@app/@core/services/notification/notification.service';
+import { StorageItem, getItem } from '@app/@core/utils';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { DashboardService } from '../dashboard.service';
 class Product {
@@ -18,6 +19,7 @@ class Product {
 }
 class Users {
   userId?: string;
+  id?: string;
   firstName?: string;
   lastName?: string;
   username?: string;
@@ -29,7 +31,6 @@ class Users {
   selector: 'app-product',
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductComponent implements OnInit {
   id: string;
@@ -37,14 +38,14 @@ export class ProductComponent implements OnInit {
   productDialog: boolean;
   products: Product[];
   selectedProducts: Product[];
-  public newProduct: Product;
+  newProduct: Product= new Product();
   submitted: boolean;
   users: Users[];
   selectedUsers: Users[];
   user: Users;
 
   userSubmitted: boolean;
-  userDialog: boolean;
+  userDialog: boolean=false;
   isLoggedIn$: any;
   constructor(
     private router: Router,
@@ -58,19 +59,19 @@ export class ProductComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+   // this.newProduct.productName="";
     this.generalService.show();
     this.id = this.route.snapshot.paramMap.get('id');
     console.log(this.id);
     this.getProductList(this.id);
+    let auth:any=getItem(StorageItem.Auth)
+    this.user= auth?.user;
   }
 
   getProductList(id): void {
     this.loading = true;
     this.productService.getProductList(id).subscribe(
       (res) => {
-        console.log(res);
-        debugger;
-
         this.products = res.results;
         console.log(this.products);
         this.loading = false;
@@ -182,13 +183,17 @@ export class ProductComponent implements OnInit {
     this.userSubmitted = false;
   }
   saveUser() {
-    debugger;
     console.log(this.newProduct);
-    if (this.newProduct.productName == (null || undefined || '')) {
+    if (this.newProduct.productName != (null || undefined || '')) {
       const request = {
         productName: this.newProduct.productName,
+        organization:this.id,
+        user:this.user.id,
+        messagingSenderId: this.newProduct.messagingSenderId,
+        serverId:this.newProduct.serverId
+
       };
-      this.productService.getSave(request).subscribe(
+      this.productService.saveProduct(request).subscribe(
         (res) => {
           console.log(res);
           //  this.getUserList();
@@ -200,6 +205,7 @@ export class ProductComponent implements OnInit {
           });
           this.userDialog = false;
           this.userSubmitted = false;
+          this.getProductList(this.id);
         },
         (error) => {
           // this.loading = false;
