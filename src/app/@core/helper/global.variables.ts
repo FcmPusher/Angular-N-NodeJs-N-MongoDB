@@ -24,6 +24,7 @@ export class GlobalVariables {
   public static RESET_PASSWORD_URL= GlobalVariables.AUTH_URL+'/reset-password';
   public static SEND_VERIFICATION_EMAIL_URL= GlobalVariables.AUTH_URL+'/send-verification-email';
   public static VERIFY_EMAIL_URL= GlobalVariables.AUTH_URL+'/verify-email';
+  public static CHANGE_PASSWORD_URL = GlobalVariables.AUTH_URL+'/change-password';
 
 
 

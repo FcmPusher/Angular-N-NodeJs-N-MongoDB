@@ -29,6 +29,7 @@ import { ProgressBarModule } from 'primeng/progressbar';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { RatingModule } from 'primeng/rating';
 import { SliderModule } from 'primeng/slider';
+import { SplitButtonModule } from 'primeng/splitbutton';
 import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
 import { ToolbarModule } from 'primeng/toolbar';
@@ -72,6 +73,7 @@ import { ProductComponent } from './product/product.component';
     InputNumberModule,
     ConfirmDialogModule,
     InputTextareaModule,
+    SplitButtonModule,
     RouterModule.forChild([
       {
         path: '',

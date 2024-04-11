@@ -118,28 +118,7 @@ export class HeaderComponent implements OnInit {
   onActiveZone(): void {
     this.open = this.open;
   }
-  // readonly items = [
-  //   { name: 'John', surname: 'Cleese' },
-  //   { name: 'Eric', surname: 'Idle' },
-  //   { name: 'Graham', surname: 'Chapman' },
-  //   { name: 'Michael', surname: 'Palin' },
-  //   { name: 'Terry', surname: 'Gilliam' },
-  //   { name: 'Terry', surname: 'Jones' },
-  // ];
-
-  // readonly stringify = (item: { name: string; surname: string }) =>
-  //   `${item.name} ${item.surname}`;
-  /*   readonly items = [
-    {name: 'John', surname: 'Cleese'},
-    {name: 'Eric', surname: 'Idle'},
-    {name: 'Graham', surname: 'Chapman'},
-    {name: 'Michael', surname: 'Palin'},
-    {name: 'Terry', surname: 'Gilliam'},
-    {name: 'Terry', surname: 'Jones'},
-];
-
-readonly stringify = (item: {name: string; surname: string}) =>
-    `${item.name} ${item.surname}`; */
+  name:any;
   readonly items = [
     'John Cleese',
     'Eric Idle',
@@ -201,6 +180,9 @@ readonly stringify = (item: {name: string; surname: string}) =>
     this.testForm.controls['testValue1'].setValue(
       currentTheme == 'light' ? false : true,
     );
+    let name:any = getItem(StorageItem.Auth);
+    console.log(name)
+    this.name=name?.user?.name;
   }
   onClickSignOut(): void {
     this.open = !this.open;
@@ -234,8 +216,9 @@ readonly stringify = (item: {name: string; surname: string}) =>
   OnClickProfile(): void {
     //this.open = !this.open;
     this.open = false;
-    const { root } = ROUTER_UTILS.config.user;
-    this.router.navigate(['/', root]);
+    const user  = ROUTER_UTILS.config.user.root+"/"+ROUTER_UTILS.config.user.overview;
+    console.log(user)
+    this.router.navigate([user]);
   }
   toggle(): void {
     this.isToggle = this.isToggle == true ? false : true;

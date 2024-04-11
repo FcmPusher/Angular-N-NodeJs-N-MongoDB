@@ -38,6 +38,7 @@ export class ProductComponent implements OnInit {
   productDialog: boolean;
   products: Product[];
   selectedProducts: Product[];
+  selectedProduct1: Product;
   newProduct: Product= new Product();
   submitted: boolean;
   users: Users[];
@@ -141,7 +142,7 @@ export class ProductComponent implements OnInit {
           (error) => {
             console.log(error);
             this.messageService.add({
-              severity: 'danger',
+              severity: 'error',
               summary: 'Failed',
               detail: 'User save failed',
               life: 3000,
@@ -212,7 +213,7 @@ export class ProductComponent implements OnInit {
           //this._notificationService.error(error.message);
           console.log(error);
           this.messageService.add({
-            severity: 'danger',
+            severity: 'error',
             summary: 'Failed',
             detail: 'User save failed',
             life: 3000,
@@ -249,7 +250,7 @@ export class ProductComponent implements OnInit {
           //this._notificationService.error(error.message);
           console.log(error);
           this.messageService.add({
-            severity: 'danger',
+            severity: 'error',
             summary: 'Failed',
             detail: 'Failed to update user',
             life: 3000,
@@ -302,7 +303,7 @@ export class ProductComponent implements OnInit {
   }
   onClick(event: any): void {
     console.log(event);
-    const url = 'dashboard/product/' + this.id + '/fragment/' + event.id;
+    const url = 'dashboard/product/' + this.id + '/fragment/' + this.selectedProduct1.id;
     this.router.navigate([url]);
   }
   back() {

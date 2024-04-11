@@ -5,8 +5,8 @@ import { MyProfilePage } from './pages/my-profile/my-profile.page';
 import { OverviewPage } from './pages/overview/overview.page';
 
 const routes: Routes = [
-  { path: ROUTER_UTILS.config.user.profile, component: MyProfilePage },
-  { path: ROUTER_UTILS.config.user.overview, component: OverviewPage },
+  { path: ROUTER_UTILS.config.user.changepassword, component: OverviewPage },
+  { path: ROUTER_UTILS.config.user.overview, component: MyProfilePage },
 ];
 
 @NgModule({

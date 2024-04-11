@@ -2,9 +2,11 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {
   FormBuilder, Validators
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { GeneralService } from '@app/@core/services/general/general.service';
 import { GlobalService } from '@app/@core/services/global/global.service';
 import { ValidationService } from '@app/@core/services/validation.service';
+import { ROUTER_UTILS } from '@app/@core/utils/router.utils';
 import { AuthService } from '../../services/auth.service';
 @Component({
   templateUrl: './sign-up.page.html',
@@ -19,30 +21,16 @@ export class SignUpPage {
     private globalService: GlobalService,
     private generalService: GeneralService,
     private formBuilder: FormBuilder,
+    private router: Router
   ) {
     this.signUpForm = this.formBuilder.group({
-      userName: ['', ValidationService.requird, Validators.minLength(5)],
+      userName: ["", [ValidationService.requird, Validators.minLength(5)]],
       email: ['', [Validators.required]],
-      password: ['', [Validators.required, Validators.minLength(10)]],
-      cpassword: ['', [Validators.required, Validators.minLength(10)]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      cpassword: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
 
-  /*   signUpForm = new FormGroup({
-    userName: new FormControl('', [
-      ValidationService.requird,
-      Validators.minLength(5),
-    ]),
-    email: new FormControl('', [Validators.required, Validators.minLength(5)]),
-    password: new FormControl('', [
-      Validators.required,
-      Validators.minLength(5),
-    ]),
-    cpassword: new FormControl('', [
-      Validators.required,
-      Validators.minLength(5),
-    ]),
-  }); */
   onSubmit(): void {
     this.generalService.show();
     const createUserForm = {
@@ -58,6 +46,8 @@ export class SignUpPage {
           this.generalService.l(res);
           this.globalService.setAuthData(res);
           this.generalService.hide();
+          const { root, signIn } = ROUTER_UTILS.config.auth;
+          this.router.navigate(['/', root, signIn]);
         }
       },
       (error) => {

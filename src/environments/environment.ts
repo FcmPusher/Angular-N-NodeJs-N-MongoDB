@@ -6,8 +6,8 @@ export const environment = {
   production: false,
   //apiUrl: 'http://localhost:3000/v1/',
   appVersion: require('../../package.json').version + '-dev',
-  apiUrl: 'https://fcmpusherapi.kumawat.co.in/v1/',
- // apiUrl: 'http://localhost:3000/v1/',
+ // apiUrl: 'https://backend-nodejs-and-mongodb.onrender.com/v1/',
+  apiUrl: 'http://localhost:3000/v1/',
 };
 
 /*

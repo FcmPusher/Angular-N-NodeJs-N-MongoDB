@@ -1,10 +1,11 @@
+import { Clipboard } from '@angular/cdk/clipboard';
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GeneralService } from '@app/@core/services/general/general.service';
 import { NotificationService } from '@app/@core/services/notification/notification.service';
 import { StorageItem, getItem } from '@app/@core/utils';
-import { ConfirmationService, MessageService } from 'primeng/api';
+import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
 import { DashboardService } from '../dashboard.service';
 
 class Fragment {
@@ -28,6 +29,10 @@ class Users {
   email?: number;
   role?: any;
 }
+interface City {
+  name: string;
+  code: string;
+}
 @Component({
   selector: 'app-fragment',
   templateUrl: './fragment.component.html',
@@ -40,14 +45,20 @@ export class FragmentComponent implements OnInit {
   productDialog: boolean;
   fragments: Fragment[];
   selectedFragments: Fragment[];
+  selectedFragment1: Fragment;
   submitted: boolean;
   users: Users[];
   selectedUsers: Users[];
   user: Users;
-  fragmentCreate:Fragment= new Fragment();
+  fragmentCreate: Fragment = new Fragment();
   userSubmitted: boolean;
   userDialog: boolean;
   isLoggedIn$: any;
+  cities: City[] | undefined;
+  selectedCity: City | undefined;
+  items: MenuItem[];
+  isInstall:boolean=false;
+  public selectedProductForExecutingAction: any = null;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -56,22 +67,39 @@ export class FragmentComponent implements OnInit {
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
     private _location: Location,
-    private generalService: GeneralService
-  ) {}
+    private generalService: GeneralService,
+    private clipboard: Clipboard
+  ) { }
 
   ngOnInit(): void {
     this.generalService.show();
 
     console.log(this.route.snapshot.url[1].path)
-    this.orgId=this.route.snapshot.url[1].path;
+    this.orgId = this.route.snapshot.url[1].path;
     this.productId = this.route.snapshot.paramMap.get('id');
     console.log(this.productId);
     this.getFragmentList(this.productId);
-    let auth:any=getItem(StorageItem.Auth)
-    this.user= auth?.user;
-    console.log(this.user)
-  }
+    let auth: any = getItem(StorageItem.Auth)
+    this.user = auth?.user;
+    console.log(this.user);
+   
+    this.items = [
+      {
+        label: 'Send Notification',
+        icon: 'pi pi-refresh',
+        command: (event) => {
+          console.log("send notification")
+        
+          this.pushNotification();
+        }
+      }
+    ];
 
+    
+  }
+  public handleActionsClick(product) {
+    this.selectedProductForExecutingAction = product;
+  }
   getFragmentList(id): void {
     this.loading = true;
     this.productService.getFragmentList(id).subscribe(
@@ -148,7 +176,7 @@ export class FragmentComponent implements OnInit {
           (error) => {
             console.log(error);
             this.messageService.add({
-              severity: 'danger',
+              severity: 'error',
               summary: 'Failed',
               detail: 'User save failed',
               life: 3000,
@@ -161,7 +189,7 @@ export class FragmentComponent implements OnInit {
     });
   }
   editProduct(product: Fragment) {
-   // this.product = { ...product };
+    // this.product = { ...product };
     this.productDialog = true;
   }
   deleteProduct(product: Fragment) {
@@ -171,7 +199,7 @@ export class FragmentComponent implements OnInit {
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.fragments = this.fragments.filter(val => val.id !== product.id);
-      //  this.product = {};
+        //  this.product = {};
 
         this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Product Deleted', life: 3000 });
       }
@@ -186,23 +214,22 @@ export class FragmentComponent implements OnInit {
     this.userSubmitted = false;
   }
   saveUser() {
-    let auth:any=getItem(StorageItem.Auth)
-    this.user= auth?.user;
-    if (this.fragmentCreate!= null || this.fragmentCreate.notification != undefined) {
+    let auth: any = getItem(StorageItem.Auth)
+    this.user = auth?.user;
+    if (this.fragmentCreate != null || this.fragmentCreate.notification != undefined) {
       const request = {
-
-        "notification":JSON.stringify(JSON.parse(this.fragmentCreate.notification)),
+        "notification": JSON.stringify(JSON.parse(this.fragmentCreate.notification)),
         "title": this.fragmentCreate.title,
-        "data":JSON.stringify(JSON.parse(this.fragmentCreate.data)),
+        "data": JSON.stringify(JSON.parse(this.fragmentCreate.data)),
         "user": this.user.id,
         "organization": this.orgId,
         "product": this.productId,
-        "id":this.fragmentCreate.id
+        "id": this.fragmentCreate.id
       }
       this.productService.saveFragment(request).subscribe(
         (res) => {
           console.log(res);
-        //  this.getUserList();
+          //  this.getUserList();
           this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'User save', life: 3000 });
           this.userDialog = false;
           this.userSubmitted = false;
@@ -212,7 +239,7 @@ export class FragmentComponent implements OnInit {
           // this.loading = false;
           //this._notificationService.error(error.message);
           console.log(error);
-          this.messageService.add({ severity: 'danger', summary: 'Failed', detail: 'User save failed', life: 3000 });
+          this.messageService.add({ severity: 'error', summary: 'Failed', detail: 'User save failed', life: 3000 });
           this.userDialog = false;
           this.userSubmitted = false;
 
@@ -243,7 +270,7 @@ export class FragmentComponent implements OnInit {
           // this.loading = false;
           //this._notificationService.error(error.message);
           console.log(error);
-          this.messageService.add({ severity: 'danger', summary: 'Failed', detail: 'Failed to update user', life: 3000 });
+          this.messageService.add({ severity: 'error', summary: 'Failed', detail: 'Failed to update user', life: 3000 });
           this.userDialog = false;
           this.userSubmitted = false;
 
@@ -265,22 +292,22 @@ export class FragmentComponent implements OnInit {
   saveProduct() {
     this.submitted = true;
 
- /*    if (this.product.name.trim()) {
-      if (this.product.id) {
-        this.products[this.findIndexById(this.product.id)] = this.product;
-        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Product Updated', life: 3000 });
-      }
-      else {
-        this.product.id = this.createId();
-        this.product.image = 'product-placeholder.svg';
-        this.products.push(this.product);
-        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Product Created', life: 3000 });
-      }
-
-      this.products = [...this.products];
-      this.productDialog = false;
-      this.product = {};
-    } */
+    /*    if (this.product.name.trim()) {
+         if (this.product.id) {
+           this.products[this.findIndexById(this.product.id)] = this.product;
+           this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Product Updated', life: 3000 });
+         }
+         else {
+           this.product.id = this.createId();
+           this.product.image = 'product-placeholder.svg';
+           this.products.push(this.product);
+           this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Product Created', life: 3000 });
+         }
+   
+         this.products = [...this.products];
+         this.productDialog = false;
+         this.product = {};
+       } */
   }
   findIndexById(id: string): number {
     let index = -1;
@@ -293,10 +320,67 @@ export class FragmentComponent implements OnInit {
 
     return index;
   }
-  onClick(event:any) : void{
-    console.log(event);
-    const url='dashboard/product/'+this.productId+'/fragment/'+event.user;
+  onClick(event: any): void {
+    const url = 'dashboard/product/' + this.productId + '/fragment/' + this.selectedFragment1.user;
     this.router.navigate([url]);
+  }
+
+  save(severity: string) {
+    console.log("inside save")
+    this.messageService.add({ severity: severity, summary: 'Success', detail: 'Data Saved' });
+  }
+
+  update() {
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Data Updated' });
+  }
+  appInstall(data:any) {
+   // console.log(data);
+    this.isInstall=true;
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Data Updated' });
+  }
+
+  delete() {
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Data Deleted' });
+  }
+  copyInputMessage(inputElement){
+    this.clipboard.copy(inputElement);
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Copied' });
+  }
+  pushNotification(){
+    console.log(this.selectedProductForExecutingAction )
+    let request={
+      "product": this.selectedProductForExecutingAction.product,
+      "orgId":this.selectedProductForExecutingAction.organization,
+      "campaignId":this.selectedProductForExecutingAction.id
+    }
+    this.productService.pushnotification(request).subscribe(
+      (res) => {
+        console.log(res);
+        //  this.getUserList();
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Successful',
+          detail: 'Sent notification successfully',
+          life: 3000,
+        });
+        this.userDialog = false;
+        this.userSubmitted = false;
+       // this.getProductList(this.id);
+      },
+      (error) => {
+        // this.loading = false;
+        this._notificationService.error(error.message);
+        console.log(error);
+        // this.messageService.add({
+        //   severity: 'error',
+        //   summary: 'Failed',
+        //   detail: 'Notification send failed',
+        //   life: 3000,
+        // });
+        this.userDialog = false;
+        this.userSubmitted = false;
+      },
+    );
   }
 
 }

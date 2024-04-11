@@ -46,20 +46,6 @@ export class AuthService {
           this.generalService.restError(error);
         },
       );
-
-    /*    const token = Array(4)
-      .fill(0)
-      .map(() => Math.random() * 99)
-      .join('-');
-    console.log(token);
-    setItem(StorageItem.Auth, token);
-    const token = Array(4)
-      .fill(0)
-      .map(() => Math.random() * 99)
-      .join('-');
-
-    setItem(StorageItem.Auth, token);
-    this.isLoggedIn$.next(true); */
   }
 
   signOut(): void {
@@ -86,5 +72,11 @@ export class AuthService {
     }
     window.alert(errorMessage);
     return throwError(errorMessage);
+  }
+  changePassword(user) {
+    return this.http.post(this.baseUrl + GlobalVariables.CHANGE_PASSWORD_URL, user);
+  }
+  resetPassword(user){
+    return this.http.post(this.baseUrl + GlobalVariables.FORGOT_PASSWORD_URL, user);
   }
 }

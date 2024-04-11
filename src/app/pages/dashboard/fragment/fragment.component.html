@@ -1,31 +1,51 @@
 <p-toast></p-toast>
 
-<div class="card" style="margin-top: -140px;">
-  <!--   <p-toolbar styleClass="p-mb-4 " class="mx-5">
-    <ng-template pTemplate="left">
-      <h1 class="text-gray-600">All FCMPusher APP</h1>
-    </ng-template>
-
-    <ng-template pTemplate="right"> </ng-template>
-  </p-toolbar> -->
+<div class="card" style="margin-top: -140px">
   <p-toolbar styleClass="p-mb-4">
     <ng-template pTemplate="left">
-      <button pButton title="Back" icon="pi pi-chevron-left" class="mx-1 p-button-outlined" (click)="back()"></button>
-      <button pButton pRipple label="New Fragment" icon="pi pi-plus" class="p-button-success p-button-outlined p-mr-2"
-        (click)="newUser()"></button>
+      <button
+        pButton
+        title="Back"
+        icon="pi pi-chevron-left"
+        class="mx-1 p-button-outlined"
+        (click)="back()"
+      ></button>
+      <button
+        pButton
+        pRipple
+        label="New Fragment"
+        icon="pi pi-plus"
+        class="p-button-success p-button-outlined p-mr-2"
+        (click)="newUser()"
+      ></button>
     </ng-template>
 
     <ng-template pTemplate="right"> </ng-template>
   </p-toolbar>
-  <p-table #dt [value]="fragments" [rows]="10" [paginator]="true" [(selection)]="selectedFragments" [rowHover]="true"
-    dataKey="id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-    [showCurrentPageReport]="true" *ngIf="fragments?.length > 0">
+  <p-table
+    #dt
+    [value]="fragments"
+    [rows]="10"
+    [paginator]="true"
+    [(selection)]="selectedFragments"
+    [rowHover]="true"
+    dataKey="id"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [showCurrentPageReport]="true"
+    *ngIf="fragments?.length > 0"
+    [(selection)]="selectedFragment1" selectionMode="single" (onRowSelect)="onClick($event)"
+  >
     <ng-template pTemplate="caption">
       <div class="p-d-flex p-ai-center p-jc-between">
         <h5 class="p-m-0">Manage Fragment</h5>
         <span class="p-input-icon-left">
           <i class="pi pi-search"></i>
-          <input pInputText type="text" (input)="dt.filterGlobal($event.target, 'contains')" placeholder="Search..." />
+          <input
+            pInputText
+            type="text"
+            (input)="dt.filterGlobal($event.target, 'contains')"
+            placeholder="Search..."
+          />
         </span>
       </div>
     </ng-template>
@@ -34,8 +54,6 @@
         <th style="width: 3rem">
           <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
         </th>
-        <!--      <th pSortableColumn="id">Product Id <p-sortIcon field="id"></p-sortIcon>
-                </th> -->
         <th pSortableColumn="title">
           Title <p-sortIcon field="title"></p-sortIcon>
         </th>
@@ -47,22 +65,46 @@
           Data <p-sortIcon field="data"></p-sortIcon>
         </th>
 
-        <th class="px-2" style="padding-left: 250px">Action</th>
+        <th class="px-2" style="padding-left: 55px">Action</th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-user>
-      <tr (click)="onClick(user)" class="cursor-pointer" style="cursor: pointer">
+      <tr
+      [pSelectableRow]="user"
+        class="cursor-pointer"
+        style="cursor: pointer"
+      >
         <td>
           <p-tableCheckbox [value]="fragments"></p-tableCheckbox>
         </td>
         <td>{{ user.title }}</td>
-        <td>{{ user.notification }}</td>
-        <td>{{ user.data }}</td>
-        <td style="padding-left: 230px">
-          <button pButton pRipple icon="pi pi-pencil" class="mx-2 p-button-rounded p-button-success p-mr-1"
-            (click)="editUser(user)"></button>
-          <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger"
-            (click)="deleteUser(user)"></button>
+        <td style="word-wrap: break-word">{{ user.notification }}</td>
+        <td style="word-wrap: break-word">{{ user.data }}</td>
+        <td style="padding-left: 20px">
+          <button
+            pButton
+            pRipple
+            icon="pi pi-pencil"
+            class="mx-2 p-button-rounded p-button-success p-mr-1"
+            (click)="editUser(user)"
+          ></button>
+          <button
+            pButton
+            pRipple
+            icon="pi pi-trash"
+            class="p-button-rounded p-button-danger mr-4"
+            (click)="deleteUser(user)"
+          ></button>
+
+          <p-splitButton
+            label="App Configure"
+            icon="pi pi-cog"
+            [model]="this.items"
+            (onClick)="appInstall(user)"
+            (onDropdownClick)="handleActionsClick(user)"
+            styleClass="p-button-rounded mr-2 mb-2"
+          ></p-splitButton> 
+          <!-- <p-splitButton label="Save" icon="pi pi-plus" (onClick)="save('info')" [model]="items"></p-splitButton> -->
         </td>
       </tr>
     </ng-template>
@@ -74,32 +116,111 @@
   </p-table>
 </div>
 
-<p-dialog [(visible)]="userDialog" [style]="{ width: '450px' }" header="Product Details" [modal]="true"
-  styleClass="p-fluid">
+<p-dialog
+  [(visible)]="userDialog"
+  [style]="{ width: '450px' }"
+  header="Product Details"
+  [modal]="true"
+  styleClass="p-fluid"
+>
   <ng-template pTemplate="content">
-
     <div class="p-field">
       <label for="Title">Title</label>
-      <input type="text" pInputText id="Title" [(ngModel)]="fragmentCreate.title" required autofocus />
-      <small class="p-invalid" *ngIf="submitted && !fragmentCreate.title">Title is required.</small>
+      <input
+        type="text"
+        pInputText
+        id="Title"
+        [(ngModel)]="fragmentCreate.title"
+        required
+        autofocus
+      />
+      <small class="p-invalid" *ngIf="submitted && !fragmentCreate.title"
+        >Title is required.</small
+      >
     </div>
     <div class="p-field">
       <label for="Notification">Notification</label>
-      <textarea rows="5" cols="30" pInputTextarea [autoResize]="true" id="message"
-        [(ngModel)]="fragmentCreate.notification" required autofocus></textarea>
-      <small class="p-invalid" *ngIf="submitted && !fragmentCreate.notification">Message is required.</small>
+      <textarea
+        rows="5"
+        cols="30"
+        pInputTextarea
+        [autoResize]="true"
+        id="message"
+        [(ngModel)]="fragmentCreate.notification"
+        required
+        autofocus
+      ></textarea>
+      <small class="p-invalid" *ngIf="submitted && !fragmentCreate.notification"
+        >Message is required.</small
+      >
     </div>
     <div class="p-field">
       <label for="data">Data</label>
-      <textarea type="text" pInputText id="data" [(ngModel)]="fragmentCreate.data" required autofocus></textarea>
-
+      <textarea
+        type="text"
+        pInputText
+        id="data"
+        [(ngModel)]="fragmentCreate.data"
+        required
+        autofocus
+      ></textarea>
     </div>
-
   </ng-template>
 
   <ng-template pTemplate="footer">
-    <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideUserDialog()"></button>
-    <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveUser()"></button>
+    <button
+      pButton
+      pRipple
+      label="Cancel"
+      icon="pi pi-times"
+      class="p-button-text"
+      (click)="hideUserDialog()"
+    ></button>
+    <button
+      pButton
+      pRipple
+      label="Save"
+      icon="pi pi-check"
+      class="p-button-text"
+      (click)="saveUser()"
+    ></button>
+  </ng-template>
+</p-dialog>
+
+<p-dialog
+  [(visible)]="isInstall"
+  [style]="{ width: '450px' }"
+  header="App Installation"
+  [modal]="true"
+  styleClass="p-fluid"
+>
+  <ng-template pTemplate="content">
+    <div class="p-field">
+      <label for="Title">Product Id</label>
+      <span class="p-input-icon-right">
+        <input type="text" pInputText [(ngModel)]="productId"  (click)="copyInputMessage(productId)"/>
+        <i class="pi pi-copy" (click)="copyInputMessage(productId)"></i>
+      </span>
+    </div>
+    <div class="p-field mt-5">
+      <label for="Notification">Org Id</label>
+      <span class="p-input-icon-right"> 
+        <input type="text" pInputText   [(ngModel)]="orgId"  (click)="copyInputMessage(orgId)"/>
+        <i class="pi pi-copy" (click)="copyInputMessage(orgId)"></i>
+    </span>
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <a href="https://documenter.getpostman.com/view/17476418/UVJbJdUW#e06dfca0-f8fc-4004-afa6-1c035b9f650a" target="_blank" rel="noopener noreferrer" class="p-button font-bold">How to setup</a>
+    <button
+      pButton
+      pRipple
+      label="Cancel"
+      icon="pi pi-times"
+      class="p-button-text"
+      (click)="hideUserDialog()"
+    ></button>
   </ng-template>
 </p-dialog>
 

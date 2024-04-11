@@ -152,7 +152,7 @@ export class DashboardService {
   }
 
   getProductList(id: any): Observable<any> {
-    return this.http.get(this.baseUrl + "product/?orgId=" + id + "&sortBy=asc&limit=10&page=1", this.requestOptions());
+    return this.http.get(this.baseUrl + "product/?organization=" + id + "&sortBy=asc&limit=10&page=1", this.requestOptions());
   }
   getFragmentList(id: any): Observable<any> {
     return this.http.get(this.baseUrl + "fragment/?product=" + id + "&sortBy=asc&limit=10&page=1", this.requestOptions());
@@ -186,6 +186,15 @@ export class DashboardService {
     });
   }
 
+  pushnotification(pushnotification: any): Observable<any> {
+    return this.http.post(this.baseUrl + 'fcmtoken/notifications', pushnotification, this.requestOptions()).pipe((response: any) => {
+      return response;
+    });
+
+    // return this.http.post(this.baseUrl + '', pushnotification, this.requestOptions()).pipe((response: any) => {
+    //   return response;
+    // });
+  }
   // Error handling
   handleError(error) {
     let errorMessage = '';

@@ -1,1 +1,28 @@
-<p>my-profile works!</p>
+<p-toast></p-toast>
+<section class="mini" id="work-process" *ngIf="isLoggedIn$">
+    <div class="mini-content">
+      <div class="container">
+        <!-- ***** Mini Box Start ***** -->
+        <div class="row align-self-center" style="  height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;">
+          <div class="col-lg-2 col-md-3 col-sm-6 col-6">
+            <a href="/users/change-password" class="mini-box" [ngClass]="{'darkmode': isDark==true, 'lightmode' : isDark==false }">
+              <tui-marker-icon src="tuiIconSettings"></tui-marker-icon>
+              <strong>Password Change</strong>
+  
+            </a>
+          </div>
+          <div class="col-lg-2 col-md-3 col-sm-6 col-6">
+            <a href="#" class="mini-box" [ngClass]="{'darkmode': isDark==true, 'lightmode' : isDark==false }">
+              <tui-marker-icon src="tuiIconUser"></tui-marker-icon>
+              <strong>Update Profile </strong>
+            </a>
+          </div>
+        
+        </div>
+        <!-- ***** Mini Box End ***** -->
+      </div>
+    </div>
+  </section>

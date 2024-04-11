@@ -6,45 +6,17 @@
   <div class="container">
     <div class="row">
       <div class="col-12">
-        <!--     <nav class="main-nav">
-
-                    <a href="#" class="logo">
-                        <img src="assets/images/logo.png" alt="Softy Pinko"/>
-                    </a>
-
-                    <ul class="nav">
-                        <li><a href="#welcome" class="active">Home</a></li>
-                        <li><a href="#features">About</a></li>
-                        <li><a href="#work-process">Work Process</a></li>
-                        <li><a href="#testimonials">Testimonials</a></li>
-                        <li><a href="#pricing-plans">Pricing Tables</a></li>
-                        <li><a href="#blog">Blog Entries</a></li>
-                        <li><a href="#contact-us">Contact Us</a></li>
-                    </ul>
-                    <a class='menu-trigger'>
-                        <span>Menu</span>
-                    </a>
-
-                </nav> -->
         <nav class="main-nav"  [ngClass]="{'darkmode': isDark==true, 'lightmode' : isDark==false }">
 
           <a href="/" class="logo">
-            <img src="assets/images/logo.png" alt="Softy Pinko"/>
+            <img src="assets/images/logo.png" alt="FCMPusher" width="80" height="80"/>
         </a>
           <ul class="nav" id="navBar">
-            <li><a href="#welcome" class="active">Home</a></li>
-            <li><a href="#features">About</a></li>
-            <li><a href="#work-process">Work Process</a></li>
-           <!--  <li><a href="#testimonials">Testimonials</a></li>
-            <li><a href="#pricing-plans">Pricing Tables</a></li>
-            <li><a href="#blog">Blog Entries</a></li>
-            <li><a href="#contact-us">Contact Us</a></li> -->
-
           <div class="flex items-center">
             <form [formGroup]="testForm">
               <label class="px-2 night-mode" style="margin-top: 10px;
-              margin-right: 10px;">
-                Night mode &nbsp; &nbsp;
+              margin-right: 10px;" title="night-mode">
+                
                 <tui-toggle
                   formControlName="testValue1"
                   size="l"
@@ -137,7 +109,7 @@
               *ngIf="isLoggedIn$ | async"
               class="px-3 mx-2 tui-space_top-1"
               style="width: 3rem !important; height: 3rem !important"
-              text="dmitry demensky"
+              [text]="name"
               size="l"
               [rounded]="true"
             ></tui-avatar>

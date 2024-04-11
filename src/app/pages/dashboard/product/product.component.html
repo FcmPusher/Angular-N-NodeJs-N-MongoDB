@@ -19,7 +19,7 @@
   </p-toolbar>
   <p-table #dt [value]="products" [rows]="10" [paginator]="true" [(selection)]="selectedProducts" [rowHover]="true"
     dataKey="id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-    [showCurrentPageReport]="true" *ngIf="products?.length > 0">
+    [showCurrentPageReport]="true" *ngIf="products?.length > 0" [(selection)]="selectedProduct1" selectionMode="single" (onRowSelect)="onClick($event)">
     <ng-template pTemplate="caption">
       <div class="p-d-flex p-ai-center p-jc-between">
         <h5 class="p-m-0">Manage Product</h5>
@@ -42,7 +42,7 @@
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-user>
-      <tr (click)="onClick(user)" class="cursor-pointer" style="cursor: pointer">
+      <tr [pSelectableRow]="user" class="cursor-pointer" style="cursor: pointer">
         <td>
           <p-tableCheckbox [value]="products"></p-tableCheckbox>
         </td>

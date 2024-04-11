@@ -28,6 +28,8 @@ export const ROUTER_UTILS = {
       root: 'users',
       overview: 'overview',
       profile: ':username',
+      changepassword: 'change-password',
+      
     },
     errorResponse: {
       notFound: '404',

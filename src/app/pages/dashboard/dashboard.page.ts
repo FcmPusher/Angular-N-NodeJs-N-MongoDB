@@ -46,6 +46,7 @@ export class DashboardPage implements OnInit {
   products: Product[];
   product: Product;
   selectedProducts: Product[];
+  selectedProduct1: Product;
   submitted: boolean;
   users: Users[];
   organization: Organization[]=[];
@@ -135,7 +136,7 @@ export class DashboardPage implements OnInit {
           (error) => {
             console.log(error);
             this.messageService.add({
-              severity: 'danger',
+              severity: 'error',
               summary: 'Failed',
               detail: 'User save failed',
               life: 3000,
@@ -149,7 +150,8 @@ export class DashboardPage implements OnInit {
   }
   onClick(event: any): void {
     console.log(event);
-    this.routerService.navigate('dashboard/product/' + event.id);
+    console.log(this.selectedProduct1)
+    this.routerService.navigate('dashboard/product/' + this.selectedProduct1.id);
     //this.router.navigate(['dashboard/product/' + event.user]);
   }
   editProduct(product: Product) {
@@ -213,8 +215,8 @@ export class DashboardPage implements OnInit {
           //this._notificationService.error(error.message);
           console.log(error);
           this.messageService.add({
-            severity: 'danger',
-            summary: 'Failed',
+            severity: 'error',
+            summary: 'Error',
             detail: 'User save failed',
             life: 3000,
           });
@@ -250,7 +252,7 @@ export class DashboardPage implements OnInit {
           //this._notificationService.error(error.message);
           console.log(error);
           this.messageService.add({
-            severity: 'danger',
+            severity: 'error',
             summary: 'Failed',
             detail: 'Failed to update user',
             life: 3000,
